@@ -30,7 +30,8 @@ $ ./CNeural
 
 ```bash
 $ cd CNeural/src
-$ gcc main.c CNeural.c CNeural_backpropagation.c -lm
+$ gcc main.c CNeural.c CNeural_backpropagation.c -lm -o main
+$ ./main
 ```
 ## PVA Requirements
 Name: Dai Duong Le  
@@ -42,9 +43,9 @@ Requirements: Implement a neural network in C
 
 - Understanding the structure of a neural network:
     - 3blue1brown Neural Networks Chapter 1-3:
-        - []()
-    - MIT 6.S191: Introduction to Deep Learning
-        - []()
+        - [3b1b Neural Networks](https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)
+    - MIT 6.S191: Introduction to Deep Learning 
+        - [Lecture 1](https://youtu.be/ErnWZxJovaM?feature=shared)
 - Understanding the algorithm behind neural networks:
 - Creating the data structure:
     - The data structure goes as follows: NeuralNetwork -> Layer -> Node (details under documentation)
