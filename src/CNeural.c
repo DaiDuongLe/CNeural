@@ -21,7 +21,7 @@
 // TODO Labeling Issue? - classification & Prediction function
 // TODO Data Import - MNIST
 // TODO Save/Import Weights
-// TODO FREE all not freed! Check input/return value validation
+// TODO Check input/return value validation
 // TODO (optional) better interface - gui?
 */
 
@@ -42,7 +42,7 @@ int CNeural_init(NeuralNetwork *nn, int inputShape, int outputShape, int numLaye
     nn->outShape = outputShape;
     nn->nLayers = numLayers;
 
-    nn->layers = malloc(sizeof(Layer) * (unsigned int) nn->nLayers); // not freed
+    nn->layers = malloc(sizeof(Layer) * (unsigned int) nn->nLayers);
     if (nn->layers == NULL) {
         printf("Error: Failed to allocate memory!");
         return 1;
@@ -53,9 +53,9 @@ int CNeural_init(NeuralNetwork *nn, int inputShape, int outputShape, int numLaye
         nn->layers[i].layerAF = layersAF[i];
 
 
-        nn->layers[i].nodes = malloc(sizeof(Node) * (unsigned int) nn->layers[i].nNodes); // not freed
-        nn->layers[i].weightedSum = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes); // not freed
-        nn->layers[i].nodesResults = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes); // not freed
+        nn->layers[i].nodes = malloc(sizeof(Node) * (unsigned int) nn->layers[i].nNodes);
+        nn->layers[i].weightedSum = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes);
+        nn->layers[i].nodesResults = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes);
         CNeural_clear_nodeResults(nn, i); // init with 0 to clear garbage values
 
         if (nn->layers[i].nodes == NULL || nn->layers[i].weightedSum == NULL || nn->layers[i].nodesResults == NULL) {
@@ -88,16 +88,16 @@ int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
     } else if (strcmp(option, "random") == 0) {
         for (int i = 0; i < nn->layers[layerNum].nNodes; i++) { // for each NODE in layer init weights
             if (layerNum == 0) { // first layer # of weights should = # of inputs
-                nn->layers[layerNum].nodes[i].weights = malloc(sizeof(float) * (unsigned int) nn->inShape); // not freed
-                nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->inShape); // not freed
+                nn->layers[layerNum].nodes[i].weights = malloc(sizeof(float) * (unsigned int) nn->inShape);
+                nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->inShape);
                 if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
                 for (int j = 0; j < nn->inShape; j++) { // for each WEIGHT in node
                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / ((double) RAND_MAX + 1.0));
                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;
                 }
             } else {  // # of weights should = previous layer # of nodes
-                nn->layers[layerNum].nodes[i].weights = malloc(sizeof(float) * (unsigned int) nn->layers[layerNum - 1].nNodes); // not freed
-                nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->inShape); // not freed
+                nn->layers[layerNum].nodes[i].weights = malloc(sizeof(float) * (unsigned int) nn->layers[layerNum - 1].nNodes);
+                nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->inShape);
                 if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
                 for (int j = 0; j < nn->layers[layerNum - 1].nNodes; j++) { // for each WEIGHT in node
                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / ((double) RAND_MAX + 1.0));
