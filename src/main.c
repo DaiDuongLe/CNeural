@@ -23,23 +23,8 @@ int main() {
         return 1;
     }
 
-    // float C[numLabels][inputShape];
-    // float F[numLabels][outputShape];
-
-    // float features[4][2] = { // random data
-    //     {1, 12},
-    //     {-169420, 24},
-    //     {6, 1},
-    //     {7, -24}
-    // };
-    // float labels[4][2] = {
-    //     {32, 32},
-    //     {212, 52},
-    //     {(float) -459.4, 99},
-    //     {100, 2}
-    // };
-
-    ctof.layers[0].nodes[0].weights[0] = (float) 1.7;
+    // equation for calculating Celsius to Fahrenheit with 1 node
+    ctof.layers[0].nodes[0].weights[0] = (float) 1.8;
     ctof.layers[0].nodes[0].bias = 32;
 
     float features[3][1] = {
@@ -55,7 +40,8 @@ int main() {
         // {212}
     };
 
-    CNeural_train(&ctof, numLabels, features, labels, "mse", "sgd", (float) 0.1, 1000);
+    CNeural_train(&ctof, numLabels, features, labels, "mse", "sgd", (float) 0.1, 100);
+    CNeural_free(&ctof);
 
     clock_t stop = clock();
     double elapsed = (double) (stop - start) / CLOCKS_PER_SEC;

@@ -191,7 +191,7 @@ Data Structures\par \pard\plain
 Neural Network type })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAABG \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
 {\b {\b Node} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-{\b Node} type })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAABS \\*MERGEFORMAT}{\fldrslt pagenum}}
+{\b Node} type })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAABR \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
 \par}
 \pard\plain \sect\sbkpage
@@ -371,8 +371,6 @@ float {\b lr}\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 int {\b epochs}\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-float * {\b labels}\par
-\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 {\b Layer} * {\b layers}\par
 }
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
@@ -413,27 +411,14 @@ int inShape}}
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 input shape, the input number of nodes \par
 }}
-{\xe \v labels\:NeuralNetwork}
-{\xe \v NeuralNetwork\:labels}
-\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
-{\b 
-float* labels}}
-\par
-{\bkmkstart AAAAAAAABJ}
-{\bkmkend AAAAAAAABJ}
-{
-\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
-{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-array of labels for training \par
-}}
 {\xe \v layers\:NeuralNetwork}
 {\xe \v NeuralNetwork\:layers}
 \pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
 {\b 
 {\b Layer}* layers}}
 \par
-{\bkmkstart AAAAAAAABK}
-{\bkmkend AAAAAAAABK}
+{\bkmkstart AAAAAAAABJ}
+{\bkmkend AAAAAAAABJ}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -445,8 +430,8 @@ array of layers \par
 {\b 
 string lf}}
 \par
-{\bkmkstart AAAAAAAABL}
-{\bkmkend AAAAAAAABL}
+{\bkmkstart AAAAAAAABK}
+{\bkmkend AAAAAAAABK}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -458,8 +443,8 @@ loss function \par
 {\b 
 float loss}}
 \par
-{\bkmkstart AAAAAAAABM}
-{\bkmkend AAAAAAAABM}
+{\bkmkstart AAAAAAAABL}
+{\bkmkend AAAAAAAABL}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -471,8 +456,8 @@ the error rate of the network (after each epoch) \par
 {\b 
 float lr}}
 \par
-{\bkmkstart AAAAAAAABN}
-{\bkmkend AAAAAAAABN}
+{\bkmkstart AAAAAAAABM}
+{\bkmkend AAAAAAAABM}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -484,8 +469,8 @@ learning rate \par
 {\b 
 int nLabels}}
 \par
-{\bkmkstart AAAAAAAABO}
-{\bkmkend AAAAAAAABO}
+{\bkmkstart AAAAAAAABN}
+{\bkmkend AAAAAAAABN}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -497,8 +482,8 @@ number of labels \par
 {\b 
 int nLayers}}
 \par
-{\bkmkstart AAAAAAAABP}
-{\bkmkend AAAAAAAABP}
+{\bkmkstart AAAAAAAABO}
+{\bkmkend AAAAAAAABO}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -510,8 +495,8 @@ number of layers \par
 {\b 
 string opt}}
 \par
-{\bkmkstart AAAAAAAABQ}
-{\bkmkend AAAAAAAABQ}
+{\bkmkstart AAAAAAAABP}
+{\bkmkend AAAAAAAABP}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -523,8 +508,8 @@ optimizer \par
 {\b 
 int outShape}}
 \par
-{\bkmkstart AAAAAAAABR}
-{\bkmkend AAAAAAAABR}
+{\bkmkstart AAAAAAAABQ}
+{\bkmkend AAAAAAAABQ}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -541,8 +526,8 @@ The documentation for this struct was generated from the following file:{\par
 Node Struct Reference\par \pard\plain 
 {\tc\tcl2 \v Node}
 {\xe \v Node}
-{\bkmkstart AAAAAAAABS}
-{\bkmkend AAAAAAAABS}
+{\bkmkstart AAAAAAAABR}
+{\bkmkend AAAAAAAABR}
 \par
 {
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -587,8 +572,8 @@ Field Documentation\par
 {\b 
 string AF}}
 \par
-{\bkmkstart AAAAAAAABT}
-{\bkmkend AAAAAAAABT}
+{\bkmkstart AAAAAAAABS}
+{\bkmkend AAAAAAAABS}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -600,8 +585,8 @@ node activation function \par
 {\b 
 float bias}}
 \par
-{\bkmkstart AAAAAAAABU}
-{\bkmkend AAAAAAAABU}
+{\bkmkstart AAAAAAAABT}
+{\bkmkend AAAAAAAABT}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -613,8 +598,8 @@ bias value \par
 {\b 
 float biasDerivative}}
 \par
-{\bkmkstart AAAAAAAABV}
-{\bkmkend AAAAAAAABV}
+{\bkmkstart AAAAAAAABU}
+{\bkmkend AAAAAAAABU}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -626,8 +611,8 @@ corresponding nudge to the bias in gradient descent \par
 {\b 
 float* weightDerivatives}}
 \par
-{\bkmkstart AAAAAAAABW}
-{\bkmkend AAAAAAAABW}
+{\bkmkstart AAAAAAAABV}
+{\bkmkend AAAAAAAABV}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -639,8 +624,8 @@ corresponding nudges to weights in gradient descent \par
 {\b 
 float* weights}}
 \par
-{\bkmkstart AAAAAAAABX}
-{\bkmkend AAAAAAAABX}
+{\bkmkstart AAAAAAAABW}
+{\bkmkend AAAAAAAABW}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -691,9 +676,9 @@ Functions\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 int {\b CNeural_init} ({\b NeuralNetwork} *nn, int inputShape, int outputShape, int numLayers, int layerNumNodes[], string layersAF[], string initMethod)\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-void {\b CNeural_clear_nodeResults} ({\b NeuralNetwork} *nn, int layerNum)\par
-\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 int {\b CNeural_wb_init} ({\b NeuralNetwork} *nn, int layerNum, string option)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b CNeural_clear_nodeResults} ({\b NeuralNetwork} *nn, int layerNum)\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 void {\b CNeural_train} ({\b NeuralNetwork} *nn, int numLabels, float inputs[numLabels][nn->inShape], float labels[numLabels][nn->outShape], string lossFunction, string optimizer, float learningRate, int epochs)\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
@@ -755,22 +740,22 @@ Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \s
 processed value by the activation \par
 }}}{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 219                                                  \{\par
-220     {\cf19 if} (strcmp(af, {\cf22 "none"}) == 0) {\cf19 return} input;\par
-221 \par
-222     {\cf19 if} (strcmp(af, {\cf22 "sigmoid"}) == 0) \{\par
-223         {\cf19 return} 1 / (1 + expf(-input));\par
-224     \}\par
-225     {\cf19 if} (strcmp(af, {\cf22 "tanh"}) == 0) \{\par
-226         {\cf19 return} tanhf(input);\par
-227     \}\par
-228     {\cf19 if} (strcmp(af, {\cf22 "relu"}) == 0) \{\par
-229         {\cf19 return} fmaxf(0, input);\par
-230     \}\par
-231     printf({\cf22 "Warning: Unknown activation function. Training results might not be optimal!\\n"});\par
-232     printf({\cf22 "Defaulting to ReLu\\n"});\par
-233     {\cf19 return} fmaxf(0, input);\par
-234 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 218                                                  \{\par
+219     {\cf19 if} (strcmp(af, {\cf22 "none"}) == 0) {\cf19 return} input;\par
+220 \par
+221     {\cf19 if} (strcmp(af, {\cf22 "sigmoid"}) == 0) \{\par
+222         {\cf19 return} 1 / (1 + expf(-input));\par
+223     \}\par
+224     {\cf19 if} (strcmp(af, {\cf22 "tanh"}) == 0) \{\par
+225         {\cf19 return} tanhf(input);\par
+226     \}\par
+227     {\cf19 if} (strcmp(af, {\cf22 "relu"}) == 0) \{\par
+228         {\cf19 return} fmaxf(0, input);\par
+229     \}\par
+230     printf({\cf22 "Warning: Unknown activation function. Training results might not be optimal!\\n"});\par
+231     printf({\cf22 "Defaulting to ReLu\\n"});\par
+232     {\cf19 return} fmaxf(0, input);\par
+233 \}\par
 }
 }
 {\xe \v CNeural_clear_nodeResults\:CNeural.c}
@@ -802,11 +787,11 @@ Parameters\par}
 }
 }{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 80                                                                 \{\par
-81     {\cf19 for} ({\cf18 int} i = 0; i < nn->layers[layerNum].nNodes; i++) \{\par
-82         nn->layers[layerNum].nodesResults[i] = 0;\par
-83     \}\par
-84 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 125                                                                 \{\par
+126     {\cf19 for} ({\cf18 int} i = 0; i < nn->layers[layerNum].nNodes; i++) \{\par
+127         nn->layers[layerNum].nodesResults[i] = 0;\par
+128     \}\par
+129 \}\par
 }
 }
 {\xe \v CNeural_free\:CNeural.c}
@@ -832,10 +817,18 @@ Parameters\par}
 }
 }{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 275                                      \{\par
-276     {\cf20 // free(nn->)}\par
-277     free(nn);\par
-278 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 274                                      \{\par
+275     {\cf19 for} ({\cf18 int} i = 0; i < nn->nLayers; i++) \{\par
+276         {\cf19 for} ({\cf18 int} j = 0; j < nn->layers[i].nNodes; j++) \{\par
+277             free(nn->layers[i].nodes->weights);\par
+278             free(nn->layers[i].nodes->weightDerivatives);\par
+279         \}\par
+280         free(nn->layers[i].nodes);\par
+281         free(nn->layers[i].weightedSum);\par
+282         free(nn->layers[i].nodesResults);\par
+283     \}\par
+284     free(nn->layers);\par
+285 \}\par
 }
 }
 {\xe \v CNeural_init\:CNeural.c}
@@ -979,30 +972,30 @@ Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \s
 loss value \par
 }}}{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 245                                                                                    \{\par
-246     {\cf19 if} (strcmp(lfn, {\cf22 "mse"}) == 0) \{ {\cf20 // Mean Squared Error}\par
-247         {\cf18 float} sum = 0;\par
-248         {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
-249             sum += powf(predicted[i] - actual[i], 2);\par
-250         \}\par
-251         {\cf19 return} sum;\par
-252     \}\par
-253     {\cf19 if} (strcmp(lfn, {\cf22 "mae"}) == 0) \{ {\cf20 // Mean Average Error}\par
-254         {\cf18 float} sum = 0;\par
-255         {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
-256             sum += fabsf(predicted[i] - actual[i]);\par
-257         \}\par
-258         {\cf19 return} sum;\par
-259     \}\par
-260 \par
-261     printf({\cf22 "Warning: Unknown loss function. Training results might not be optimal!\\n"});\par
-262     printf({\cf22 "Defaulting to MSE\\n"});\par
-263     {\cf18 float} sum = 0;\par
-264     {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
-265         sum += powf(predicted[i] - actual[i], 2);\par
-266     \}\par
-267     {\cf19 return} sum;\par
-268 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 244                                                                                    \{\par
+245     {\cf19 if} (strcmp(lfn, {\cf22 "mse"}) == 0) \{ {\cf20 // Mean Squared Error}\par
+246         {\cf18 float} sum = 0;\par
+247         {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
+248             sum += powf(predicted[i] - actual[i], 2);\par
+249         \}\par
+250         {\cf19 return} sum;\par
+251     \}\par
+252     {\cf19 if} (strcmp(lfn, {\cf22 "mae"}) == 0) \{ {\cf20 // Mean Average Error}\par
+253         {\cf18 float} sum = 0;\par
+254         {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
+255             sum += fabsf(predicted[i] - actual[i]);\par
+256         \}\par
+257         {\cf19 return} sum;\par
+258     \}\par
+259 \par
+260     printf({\cf22 "Warning: Unknown loss function. Training results might not be optimal!\\n"});\par
+261     printf({\cf22 "Defaulting to MSE\\n"});\par
+262     {\cf18 float} sum = 0;\par
+263     {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
+264         sum += powf(predicted[i] - actual[i], 2);\par
+265     \}\par
+266     {\cf19 return} sum;\par
+267 \}\par
 }
 }
 {\xe \v CNeural_train\:CNeural.c}
@@ -1017,7 +1010,7 @@ void CNeural_train ({\b NeuralNetwork} * nn, int numLabels, float inputs[numLabe
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Trains a neural network using the specified parameters.\par
-Weighted sums get forward propagated (forward pass) by calculating linear combinations applying an activation function for each node in each layer. After all the training examples go through 1 epoch, the loss and gradient are calculated based on the optimizer. Neural network parameters are adjusted with the learning rate accordingly.\par
+Weighted sums get forward propagated (forward pass) by calculating linear combinations and applying an activation function for each node in each layer. After all the training examples go through 1 epoch, the loss and gradient are calculated based on the optimizer. Neural network parameters are adjusted with the learning rate accordingly.\par
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs16\cgrid 
 Parameters\par}
 \pard\plain \s81\li360\widctlpar\ql\adjustright \fs20\cgrid \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
@@ -1071,69 +1064,69 @@ Parameters\par}
 }
 }{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 148                                                                                                                                                                                                          \{\par
-149     nn->nLabels = numLabels;\par
-150     nn->lf = lossFunction;\par
-151     nn->opt = optimizer;\par
-152     nn->lr = learningRate;\par
-153     nn->epochs = epochs;\par
-154 \par
-155     {\cf20 // TODO loss and expand activation functions}\par
-156     {\cf19 for} ({\cf18 int} epoch = 1; epoch <= nn->epochs; epoch++) \{\par
-157         printf({\cf22 "Epoch %d/%d\\n"}, epoch, nn->epochs);\par
-158         {\cf19 for} ({\cf18 int} label = 0; label < numLabels; label++) \{\par
-159             {\cf20 // printf("Label: %d\\n", label + 1);}\par
-160 \par
-161             {\cf19 for} ({\cf18 int} layerNum = 0; layerNum < nn->nLayers; layerNum++) \{\par
-162                 {\cf20 // printf("Layer %d\\n", layerNum + 1);}\par
-163 \par
-164                 {\cf19 for} ({\cf18 int} nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) \{\par
-165                     {\cf20 // printf("\\tNode %d\\n", nodeNum + 1);}\par
-166                     {\cf19 if} (layerNum == 0) \{ {\cf20 // 1st layer # of weights should = # of inputs}\par
-167                         {\cf19 for} ({\cf18 int} weightNum = 0; weightNum < nn->inShape; weightNum++) \{\par
-168                             {\cf20 // printf("\\t\\tWeight %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weights[weightNum]);}\par
-169                             nn->layers[layerNum].nodesResults[nodeNum] +=\par
-170                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * inputs[label][weightNum]; {\cf20 // adds for each linear combination (weighted sum)}\par
-171 \par
-172                             {\cf20 // printf("Noderes value: %f\\n", nn->layers[0].nodesResults[nodeNum]);}\par
-173                         \}\par
-174                     \} {\cf19 else} \{  {\cf20 // # of weights should = previous layer # of nodes}\par
-175                         {\cf19 for} ({\cf18 int} weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) \{\par
-176                             {\cf20 // printf("\\t\\tWeight %d: %f \\t", weightNum + 1, nn->layers[layerNum].nodes[nodeNum].weights[weightNum]);}\par
-177                             nn->layers[layerNum].nodesResults[nodeNum] +=\par
-178                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; {\cf20 // adds for each linear combination (weighted sum)}\par
-179                             {\cf20 // printf("Noderes value: %f\\n", nn->layers[layerNum].nodesResults[nodeNum]);}\par
-180                         \}\par
-181                     \}\par
-182                     nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;\par
-183                     {\cf20 // printf("\\n");}\par
-184                     {\cf20 // printf("\\t\\tAfter bias: %f\\n", nn->layers[layerNum].nodesResults[nodeNum]);}\par
-185 \par
-186                     {\cf20 // printf("\\t\\tAfter activation: %f\\n", CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF));}\par
-187                     nn->layers[layerNum].weightedSum[nodeNum] = nn->layers[layerNum].nodesResults[nodeNum];\par
-188                     nn->layers[layerNum].nodesResults[nodeNum] =\par
-189                         CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF);\par
-190                     {\cf20 // printf("\\n");}\par
-191                 \}\par
-192 \par
-193                 {\cf20 // printf("\\n");}\par
-194             \}\par
-195 \par
-196             nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf);\par
-197 \par
-198             {\cf20 // CNeural_derivatives()}\par
-199 \par
-200             {\cf19 for} ({\cf18 int} layerNum = 0; layerNum < nn->nLayers; layerNum++) \{ {\cf20 // clear after each label}\par
-201                 CNeural_clear_nodeResults(nn, layerNum);\par
-202             \}\par
-203         \}\par
-204         nn->loss = nn->loss / (float) nn->nLabels;\par
-205         printf({\cf22 "Loss: %f\\n"}, nn->loss);\par
-206         printf({\cf22 "\\n"});\par
-207 \par
-208     \}\par
-209 \par
-210 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 147                                                                                                                                                                                                          \{\par
+148     nn->nLabels = numLabels;\par
+149     nn->lf = lossFunction;\par
+150     nn->opt = optimizer;\par
+151     nn->lr = learningRate;\par
+152     nn->epochs = epochs;\par
+153 \par
+154     {\cf20 // TODO loss and expand activation functions}\par
+155     {\cf19 for} ({\cf18 int} epoch = 1; epoch <= nn->epochs; epoch++) \{\par
+156         printf({\cf22 "Epoch %d/%d\\n"}, epoch, nn->epochs);\par
+157         {\cf19 for} ({\cf18 int} label = 0; label < numLabels; label++) \{\par
+158             {\cf20 // printf("Label: %d\\n", label + 1);}\par
+159 \par
+160             {\cf19 for} ({\cf18 int} layerNum = 0; layerNum < nn->nLayers; layerNum++) \{\par
+161                 {\cf20 // printf("Layer %d\\n", layerNum + 1);}\par
+162 \par
+163                 {\cf19 for} ({\cf18 int} nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) \{\par
+164                     {\cf20 // printf("\\tNode %d\\n", nodeNum + 1);}\par
+165                     {\cf19 if} (layerNum == 0) \{ {\cf20 // 1st layer # of weights should = # of inputs}\par
+166                         {\cf19 for} ({\cf18 int} weightNum = 0; weightNum < nn->inShape; weightNum++) \{\par
+167                             {\cf20 // printf("\\t\\tWeight %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weights[weightNum]);}\par
+168                             nn->layers[layerNum].nodesResults[nodeNum] +=\par
+169                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * inputs[label][weightNum]; {\cf20 // adds for each linear combination (weighted sum)}\par
+170 \par
+171                             {\cf20 // printf("Noderes value: %f\\n", nn->layers[0].nodesResults[nodeNum]);}\par
+172                         \}\par
+173                     \} {\cf19 else} \{  {\cf20 // # of weights should = previous layer # of nodes}\par
+174                         {\cf19 for} ({\cf18 int} weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) \{\par
+175                             {\cf20 // printf("\\t\\tWeight %d: %f \\t", weightNum + 1, nn->layers[layerNum].nodes[nodeNum].weights[weightNum]);}\par
+176                             nn->layers[layerNum].nodesResults[nodeNum] +=\par
+177                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; {\cf20 // adds for each linear combination (weighted sum)}\par
+178                             {\cf20 // printf("Noderes value: %f\\n", nn->layers[layerNum].nodesResults[nodeNum]);}\par
+179                         \}\par
+180                     \}\par
+181                     nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;\par
+182                     {\cf20 // printf("\\n");}\par
+183                     {\cf20 // printf("\\t\\tAfter bias: %f\\n", nn->layers[layerNum].nodesResults[nodeNum]);}\par
+184 \par
+185                     {\cf20 // printf("\\t\\tAfter activation: %f\\n", CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF));}\par
+186                     nn->layers[layerNum].weightedSum[nodeNum] = nn->layers[layerNum].nodesResults[nodeNum];\par
+187                     nn->layers[layerNum].nodesResults[nodeNum] =\par
+188                         CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF);\par
+189                     {\cf20 // printf("\\n");}\par
+190                 \}\par
+191 \par
+192                 {\cf20 // printf("\\n");}\par
+193             \}\par
+194 \par
+195             nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf);\par
+196 \par
+197             {\cf20 // CNeural_derivatives()}\par
+198 \par
+199             {\cf19 for} ({\cf18 int} layerNum = 0; layerNum < nn->nLayers; layerNum++) \{ {\cf20 // clear after each label}\par
+200                 CNeural_clear_nodeResults(nn, layerNum);\par
+201             \}\par
+202         \}\par
+203         nn->loss = nn->loss / (float) nn->nLabels;\par
+204         printf({\cf22 "Loss: %f\\n"}, nn->loss);\par
+205         printf({\cf22 "\\n"});\par
+206 \par
+207     \}\par
+208 \par
+209 \}\par
 }
 }
 {\xe \v CNeural_wb_init\:CNeural.c}
@@ -1174,42 +1167,42 @@ Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \s
 returns 0 for sucess \par
 }}}{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 94                                                                     \{\par
-95     {\cf20 //TODO (optional) calculate mean, variance, standard deviation for measuring appropriateness}\par
-96     srand(({\cf18 unsigned} {\cf18 int}) time(NULL)); {\cf20 // init random generator}\par
-97 \par
-98     {\cf19 if} (strcmp(option, {\cf22 "zero"}) == 0) \{\par
-99         {\cf20 // probably not a good init option}\par
-100     \} {\cf19 else} {\cf19 if} (strcmp(option, {\cf22 "random"}) == 0) \{\par
-101         {\cf19 for} ({\cf18 int} i = 0; i < nn->layers[layerNum].nNodes; i++) \{ {\cf20 // for each NODE in layer init weights}\par
-102             {\cf19 if} (layerNum == 0) \{ {\cf20 // first layer # of weights should = # of inputs}\par
-103                 nn->layers[layerNum].nodes[i].weights = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
-104                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
-105                 {\cf19 if} (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) \{ printf({\cf22 "Error: Failed to allocate memory!"}); {\cf19 return} 1; \}\par
-106                 {\cf19 for} ({\cf18 int} j = 0; j < nn->inShape; j++) \{ {\cf20 // for each WEIGHT in node}\par
-107                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / (({\cf18 double}) RAND_MAX + 1.0));\par
-108                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;\par
-109                 \}\par
-110             \} {\cf19 else} \{  {\cf20 // # of weights should = previous layer # of nodes}\par
-111                 nn->layers[layerNum].nodes[i].weights = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->layers[layerNum - 1].nNodes); {\cf20 // not freed}\par
-112                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
-113                 {\cf19 if} (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) \{ printf({\cf22 "Error: Failed to allocate memory!"}); {\cf19 return} 1; \}\par
-114                 {\cf19 for} ({\cf18 int} j = 0; j < nn->layers[layerNum - 1].nNodes; j++) \{ {\cf20 // for each WEIGHT in node}\par
-115                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / (({\cf18 double}) RAND_MAX + 1.0));\par
-116                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;\par
-117                 \}\par
-118             \}\par
-119             nn->layers[layerNum].nodes[i].bias = 0; {\cf20 // bias can be 0}\par
-120             nn->layers[layerNum].nodes[i].biasDerivative = 0;\par
-121             nn->layers[layerNum].nodes[i].AF = nn->layers[layerNum].layerAF; {\cf20 // applies to the whole layer}\par
-122         \}\par
-123     \} {\cf19 else} \{\par
-124         printf({\cf22 "Error: Unknown initialization method."});\par
-125         {\cf19 return} 1;\par
-126     \}\par
-127 \par
-128     {\cf19 return} 0;\par
-129 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 82                                                                     \{\par
+83     {\cf20 //TODO (optional) calculate mean, variance, standard deviation for measuring appropriateness}\par
+84     srand(({\cf18 unsigned} {\cf18 int}) time(NULL)); {\cf20 // init random generator}\par
+85 \par
+86     {\cf19 if} (strcmp(option, {\cf22 "zero"}) == 0) \{\par
+87         {\cf20 // probably not a good init option}\par
+88     \} {\cf19 else} {\cf19 if} (strcmp(option, {\cf22 "random"}) == 0) \{\par
+89         {\cf19 for} ({\cf18 int} i = 0; i < nn->layers[layerNum].nNodes; i++) \{ {\cf20 // for each NODE in layer init weights}\par
+90             {\cf19 if} (layerNum == 0) \{ {\cf20 // first layer # of weights should = # of inputs}\par
+91                 nn->layers[layerNum].nodes[i].weights = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
+92                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
+93                 {\cf19 if} (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) \{ printf({\cf22 "Error: Failed to allocate memory!"}); {\cf19 return} 1; \}\par
+94                 {\cf19 for} ({\cf18 int} j = 0; j < nn->inShape; j++) \{ {\cf20 // for each WEIGHT in node}\par
+95                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / (({\cf18 double}) RAND_MAX + 1.0));\par
+96                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;\par
+97                 \}\par
+98             \} {\cf19 else} \{  {\cf20 // # of weights should = previous layer # of nodes}\par
+99                 nn->layers[layerNum].nodes[i].weights = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->layers[layerNum - 1].nNodes); {\cf20 // not freed}\par
+100                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
+101                 {\cf19 if} (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) \{ printf({\cf22 "Error: Failed to allocate memory!"}); {\cf19 return} 1; \}\par
+102                 {\cf19 for} ({\cf18 int} j = 0; j < nn->layers[layerNum - 1].nNodes; j++) \{ {\cf20 // for each WEIGHT in node}\par
+103                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / (({\cf18 double}) RAND_MAX + 1.0));\par
+104                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;\par
+105                 \}\par
+106             \}\par
+107             nn->layers[layerNum].nodes[i].bias = 0; {\cf20 // bias can be 0}\par
+108             nn->layers[layerNum].nodes[i].biasDerivative = 0;\par
+109             nn->layers[layerNum].nodes[i].AF = nn->layers[layerNum].layerAF; {\cf20 // applies to the whole layer}\par
+110         \}\par
+111     \} {\cf19 else} \{\par
+112         printf({\cf22 "Error: Unknown initialization method."});\par
+113         {\cf19 return} 1;\par
+114     \}\par
+115 \par
+116     {\cf19 return} 0;\par
+117 \}\par
 }
 }
 \par \pard\plain 
@@ -1333,22 +1326,22 @@ Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \s
 processed value by the activation \par
 }}}{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 219                                                  \{\par
-220     {\cf19 if} (strcmp(af, {\cf22 "none"}) == 0) {\cf19 return} input;\par
-221 \par
-222     {\cf19 if} (strcmp(af, {\cf22 "sigmoid"}) == 0) \{\par
-223         {\cf19 return} 1 / (1 + expf(-input));\par
-224     \}\par
-225     {\cf19 if} (strcmp(af, {\cf22 "tanh"}) == 0) \{\par
-226         {\cf19 return} tanhf(input);\par
-227     \}\par
-228     {\cf19 if} (strcmp(af, {\cf22 "relu"}) == 0) \{\par
-229         {\cf19 return} fmaxf(0, input);\par
-230     \}\par
-231     printf({\cf22 "Warning: Unknown activation function. Training results might not be optimal!\\n"});\par
-232     printf({\cf22 "Defaulting to ReLu\\n"});\par
-233     {\cf19 return} fmaxf(0, input);\par
-234 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 218                                                  \{\par
+219     {\cf19 if} (strcmp(af, {\cf22 "none"}) == 0) {\cf19 return} input;\par
+220 \par
+221     {\cf19 if} (strcmp(af, {\cf22 "sigmoid"}) == 0) \{\par
+222         {\cf19 return} 1 / (1 + expf(-input));\par
+223     \}\par
+224     {\cf19 if} (strcmp(af, {\cf22 "tanh"}) == 0) \{\par
+225         {\cf19 return} tanhf(input);\par
+226     \}\par
+227     {\cf19 if} (strcmp(af, {\cf22 "relu"}) == 0) \{\par
+228         {\cf19 return} fmaxf(0, input);\par
+229     \}\par
+230     printf({\cf22 "Warning: Unknown activation function. Training results might not be optimal!\\n"});\par
+231     printf({\cf22 "Defaulting to ReLu\\n"});\par
+232     {\cf19 return} fmaxf(0, input);\par
+233 \}\par
 }
 }
 {\xe \v CNeural_af_derivative\:CNeural.h}
@@ -1435,11 +1428,11 @@ Parameters\par}
 }
 }{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 80                                                                 \{\par
-81     {\cf19 for} ({\cf18 int} i = 0; i < nn->layers[layerNum].nNodes; i++) \{\par
-82         nn->layers[layerNum].nodesResults[i] = 0;\par
-83     \}\par
-84 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 125                                                                 \{\par
+126     {\cf19 for} ({\cf18 int} i = 0; i < nn->layers[layerNum].nNodes; i++) \{\par
+127         nn->layers[layerNum].nodesResults[i] = 0;\par
+128     \}\par
+129 \}\par
 }
 }
 {\xe \v CNeural_derivatives\:CNeural.h}
@@ -1526,10 +1519,18 @@ Parameters\par}
 }
 }{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 275                                      \{\par
-276     {\cf20 // free(nn->)}\par
-277     free(nn);\par
-278 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 274                                      \{\par
+275     {\cf19 for} ({\cf18 int} i = 0; i < nn->nLayers; i++) \{\par
+276         {\cf19 for} ({\cf18 int} j = 0; j < nn->layers[i].nNodes; j++) \{\par
+277             free(nn->layers[i].nodes->weights);\par
+278             free(nn->layers[i].nodes->weightDerivatives);\par
+279         \}\par
+280         free(nn->layers[i].nodes);\par
+281         free(nn->layers[i].weightedSum);\par
+282         free(nn->layers[i].nodesResults);\par
+283     \}\par
+284     free(nn->layers);\par
+285 \}\par
 }
 }
 {\xe \v CNeural_init\:CNeural.h}
@@ -1673,30 +1674,30 @@ Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \s
 loss value \par
 }}}{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 245                                                                                    \{\par
-246     {\cf19 if} (strcmp(lfn, {\cf22 "mse"}) == 0) \{ {\cf20 // Mean Squared Error}\par
-247         {\cf18 float} sum = 0;\par
-248         {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
-249             sum += powf(predicted[i] - actual[i], 2);\par
-250         \}\par
-251         {\cf19 return} sum;\par
-252     \}\par
-253     {\cf19 if} (strcmp(lfn, {\cf22 "mae"}) == 0) \{ {\cf20 // Mean Average Error}\par
-254         {\cf18 float} sum = 0;\par
-255         {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
-256             sum += fabsf(predicted[i] - actual[i]);\par
-257         \}\par
-258         {\cf19 return} sum;\par
-259     \}\par
-260 \par
-261     printf({\cf22 "Warning: Unknown loss function. Training results might not be optimal!\\n"});\par
-262     printf({\cf22 "Defaulting to MSE\\n"});\par
-263     {\cf18 float} sum = 0;\par
-264     {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
-265         sum += powf(predicted[i] - actual[i], 2);\par
-266     \}\par
-267     {\cf19 return} sum;\par
-268 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 244                                                                                    \{\par
+245     {\cf19 if} (strcmp(lfn, {\cf22 "mse"}) == 0) \{ {\cf20 // Mean Squared Error}\par
+246         {\cf18 float} sum = 0;\par
+247         {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
+248             sum += powf(predicted[i] - actual[i], 2);\par
+249         \}\par
+250         {\cf19 return} sum;\par
+251     \}\par
+252     {\cf19 if} (strcmp(lfn, {\cf22 "mae"}) == 0) \{ {\cf20 // Mean Average Error}\par
+253         {\cf18 float} sum = 0;\par
+254         {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
+255             sum += fabsf(predicted[i] - actual[i]);\par
+256         \}\par
+257         {\cf19 return} sum;\par
+258     \}\par
+259 \par
+260     printf({\cf22 "Warning: Unknown loss function. Training results might not be optimal!\\n"});\par
+261     printf({\cf22 "Defaulting to MSE\\n"});\par
+262     {\cf18 float} sum = 0;\par
+263     {\cf19 for} ({\cf18 int} i = 0; i < outputShape; i++) \{\par
+264         sum += powf(predicted[i] - actual[i], 2);\par
+265     \}\par
+266     {\cf19 return} sum;\par
+267 \}\par
 }
 }
 {\xe \v CNeural_loss_derivative\:CNeural.h}
@@ -1763,7 +1764,7 @@ void CNeural_train ({\b NeuralNetwork} * nn, int numLabels, float inputs[numLabe
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Trains a neural network using the specified parameters.\par
-Weighted sums get forward propagated (forward pass) by calculating linear combinations applying an activation function for each node in each layer. After all the training examples go through 1 epoch, the loss and gradient are calculated based on the optimizer. Neural network parameters are adjusted with the learning rate accordingly.\par
+Weighted sums get forward propagated (forward pass) by calculating linear combinations and applying an activation function for each node in each layer. After all the training examples go through 1 epoch, the loss and gradient are calculated based on the optimizer. Neural network parameters are adjusted with the learning rate accordingly.\par
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs16\cgrid 
 Parameters\par}
 \pard\plain \s81\li360\widctlpar\ql\adjustright \fs20\cgrid \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
@@ -1817,69 +1818,69 @@ Parameters\par}
 }
 }{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 148                                                                                                                                                                                                          \{\par
-149     nn->nLabels = numLabels;\par
-150     nn->lf = lossFunction;\par
-151     nn->opt = optimizer;\par
-152     nn->lr = learningRate;\par
-153     nn->epochs = epochs;\par
-154 \par
-155     {\cf20 // TODO loss and expand activation functions}\par
-156     {\cf19 for} ({\cf18 int} epoch = 1; epoch <= nn->epochs; epoch++) \{\par
-157         printf({\cf22 "Epoch %d/%d\\n"}, epoch, nn->epochs);\par
-158         {\cf19 for} ({\cf18 int} label = 0; label < numLabels; label++) \{\par
-159             {\cf20 // printf("Label: %d\\n", label + 1);}\par
-160 \par
-161             {\cf19 for} ({\cf18 int} layerNum = 0; layerNum < nn->nLayers; layerNum++) \{\par
-162                 {\cf20 // printf("Layer %d\\n", layerNum + 1);}\par
-163 \par
-164                 {\cf19 for} ({\cf18 int} nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) \{\par
-165                     {\cf20 // printf("\\tNode %d\\n", nodeNum + 1);}\par
-166                     {\cf19 if} (layerNum == 0) \{ {\cf20 // 1st layer # of weights should = # of inputs}\par
-167                         {\cf19 for} ({\cf18 int} weightNum = 0; weightNum < nn->inShape; weightNum++) \{\par
-168                             {\cf20 // printf("\\t\\tWeight %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weights[weightNum]);}\par
-169                             nn->layers[layerNum].nodesResults[nodeNum] +=\par
-170                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * inputs[label][weightNum]; {\cf20 // adds for each linear combination (weighted sum)}\par
-171 \par
-172                             {\cf20 // printf("Noderes value: %f\\n", nn->layers[0].nodesResults[nodeNum]);}\par
-173                         \}\par
-174                     \} {\cf19 else} \{  {\cf20 // # of weights should = previous layer # of nodes}\par
-175                         {\cf19 for} ({\cf18 int} weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) \{\par
-176                             {\cf20 // printf("\\t\\tWeight %d: %f \\t", weightNum + 1, nn->layers[layerNum].nodes[nodeNum].weights[weightNum]);}\par
-177                             nn->layers[layerNum].nodesResults[nodeNum] +=\par
-178                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; {\cf20 // adds for each linear combination (weighted sum)}\par
-179                             {\cf20 // printf("Noderes value: %f\\n", nn->layers[layerNum].nodesResults[nodeNum]);}\par
-180                         \}\par
-181                     \}\par
-182                     nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;\par
-183                     {\cf20 // printf("\\n");}\par
-184                     {\cf20 // printf("\\t\\tAfter bias: %f\\n", nn->layers[layerNum].nodesResults[nodeNum]);}\par
-185 \par
-186                     {\cf20 // printf("\\t\\tAfter activation: %f\\n", CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF));}\par
-187                     nn->layers[layerNum].weightedSum[nodeNum] = nn->layers[layerNum].nodesResults[nodeNum];\par
-188                     nn->layers[layerNum].nodesResults[nodeNum] =\par
-189                         CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF);\par
-190                     {\cf20 // printf("\\n");}\par
-191                 \}\par
-192 \par
-193                 {\cf20 // printf("\\n");}\par
-194             \}\par
-195 \par
-196             nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf);\par
-197 \par
-198             {\cf20 // CNeural_derivatives()}\par
-199 \par
-200             {\cf19 for} ({\cf18 int} layerNum = 0; layerNum < nn->nLayers; layerNum++) \{ {\cf20 // clear after each label}\par
-201                 CNeural_clear_nodeResults(nn, layerNum);\par
-202             \}\par
-203         \}\par
-204         nn->loss = nn->loss / (float) nn->nLabels;\par
-205         printf({\cf22 "Loss: %f\\n"}, nn->loss);\par
-206         printf({\cf22 "\\n"});\par
-207 \par
-208     \}\par
-209 \par
-210 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 147                                                                                                                                                                                                          \{\par
+148     nn->nLabels = numLabels;\par
+149     nn->lf = lossFunction;\par
+150     nn->opt = optimizer;\par
+151     nn->lr = learningRate;\par
+152     nn->epochs = epochs;\par
+153 \par
+154     {\cf20 // TODO loss and expand activation functions}\par
+155     {\cf19 for} ({\cf18 int} epoch = 1; epoch <= nn->epochs; epoch++) \{\par
+156         printf({\cf22 "Epoch %d/%d\\n"}, epoch, nn->epochs);\par
+157         {\cf19 for} ({\cf18 int} label = 0; label < numLabels; label++) \{\par
+158             {\cf20 // printf("Label: %d\\n", label + 1);}\par
+159 \par
+160             {\cf19 for} ({\cf18 int} layerNum = 0; layerNum < nn->nLayers; layerNum++) \{\par
+161                 {\cf20 // printf("Layer %d\\n", layerNum + 1);}\par
+162 \par
+163                 {\cf19 for} ({\cf18 int} nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) \{\par
+164                     {\cf20 // printf("\\tNode %d\\n", nodeNum + 1);}\par
+165                     {\cf19 if} (layerNum == 0) \{ {\cf20 // 1st layer # of weights should = # of inputs}\par
+166                         {\cf19 for} ({\cf18 int} weightNum = 0; weightNum < nn->inShape; weightNum++) \{\par
+167                             {\cf20 // printf("\\t\\tWeight %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weights[weightNum]);}\par
+168                             nn->layers[layerNum].nodesResults[nodeNum] +=\par
+169                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * inputs[label][weightNum]; {\cf20 // adds for each linear combination (weighted sum)}\par
+170 \par
+171                             {\cf20 // printf("Noderes value: %f\\n", nn->layers[0].nodesResults[nodeNum]);}\par
+172                         \}\par
+173                     \} {\cf19 else} \{  {\cf20 // # of weights should = previous layer # of nodes}\par
+174                         {\cf19 for} ({\cf18 int} weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) \{\par
+175                             {\cf20 // printf("\\t\\tWeight %d: %f \\t", weightNum + 1, nn->layers[layerNum].nodes[nodeNum].weights[weightNum]);}\par
+176                             nn->layers[layerNum].nodesResults[nodeNum] +=\par
+177                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; {\cf20 // adds for each linear combination (weighted sum)}\par
+178                             {\cf20 // printf("Noderes value: %f\\n", nn->layers[layerNum].nodesResults[nodeNum]);}\par
+179                         \}\par
+180                     \}\par
+181                     nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;\par
+182                     {\cf20 // printf("\\n");}\par
+183                     {\cf20 // printf("\\t\\tAfter bias: %f\\n", nn->layers[layerNum].nodesResults[nodeNum]);}\par
+184 \par
+185                     {\cf20 // printf("\\t\\tAfter activation: %f\\n", CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF));}\par
+186                     nn->layers[layerNum].weightedSum[nodeNum] = nn->layers[layerNum].nodesResults[nodeNum];\par
+187                     nn->layers[layerNum].nodesResults[nodeNum] =\par
+188                         CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF);\par
+189                     {\cf20 // printf("\\n");}\par
+190                 \}\par
+191 \par
+192                 {\cf20 // printf("\\n");}\par
+193             \}\par
+194 \par
+195             nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf);\par
+196 \par
+197             {\cf20 // CNeural_derivatives()}\par
+198 \par
+199             {\cf19 for} ({\cf18 int} layerNum = 0; layerNum < nn->nLayers; layerNum++) \{ {\cf20 // clear after each label}\par
+200                 CNeural_clear_nodeResults(nn, layerNum);\par
+201             \}\par
+202         \}\par
+203         nn->loss = nn->loss / (float) nn->nLabels;\par
+204         printf({\cf22 "Loss: %f\\n"}, nn->loss);\par
+205         printf({\cf22 "\\n"});\par
+206 \par
+207     \}\par
+208 \par
+209 \}\par
 }
 }
 {\xe \v CNeural_wb_init\:CNeural.h}
@@ -1920,42 +1921,42 @@ Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \s
 returns 0 for sucess \par
 }}}{
 \par
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 94                                                                     \{\par
-95     {\cf20 //TODO (optional) calculate mean, variance, standard deviation for measuring appropriateness}\par
-96     srand(({\cf18 unsigned} {\cf18 int}) time(NULL)); {\cf20 // init random generator}\par
-97 \par
-98     {\cf19 if} (strcmp(option, {\cf22 "zero"}) == 0) \{\par
-99         {\cf20 // probably not a good init option}\par
-100     \} {\cf19 else} {\cf19 if} (strcmp(option, {\cf22 "random"}) == 0) \{\par
-101         {\cf19 for} ({\cf18 int} i = 0; i < nn->layers[layerNum].nNodes; i++) \{ {\cf20 // for each NODE in layer init weights}\par
-102             {\cf19 if} (layerNum == 0) \{ {\cf20 // first layer # of weights should = # of inputs}\par
-103                 nn->layers[layerNum].nodes[i].weights = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
-104                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
-105                 {\cf19 if} (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) \{ printf({\cf22 "Error: Failed to allocate memory!"}); {\cf19 return} 1; \}\par
-106                 {\cf19 for} ({\cf18 int} j = 0; j < nn->inShape; j++) \{ {\cf20 // for each WEIGHT in node}\par
-107                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / (({\cf18 double}) RAND_MAX + 1.0));\par
-108                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;\par
-109                 \}\par
-110             \} {\cf19 else} \{  {\cf20 // # of weights should = previous layer # of nodes}\par
-111                 nn->layers[layerNum].nodes[i].weights = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->layers[layerNum - 1].nNodes); {\cf20 // not freed}\par
-112                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
-113                 {\cf19 if} (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) \{ printf({\cf22 "Error: Failed to allocate memory!"}); {\cf19 return} 1; \}\par
-114                 {\cf19 for} ({\cf18 int} j = 0; j < nn->layers[layerNum - 1].nNodes; j++) \{ {\cf20 // for each WEIGHT in node}\par
-115                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / (({\cf18 double}) RAND_MAX + 1.0));\par
-116                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;\par
-117                 \}\par
-118             \}\par
-119             nn->layers[layerNum].nodes[i].bias = 0; {\cf20 // bias can be 0}\par
-120             nn->layers[layerNum].nodes[i].biasDerivative = 0;\par
-121             nn->layers[layerNum].nodes[i].AF = nn->layers[layerNum].layerAF; {\cf20 // applies to the whole layer}\par
-122         \}\par
-123     \} {\cf19 else} \{\par
-124         printf({\cf22 "Error: Unknown initialization method."});\par
-125         {\cf19 return} 1;\par
-126     \}\par
-127 \par
-128     {\cf19 return} 0;\par
-129 \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 82                                                                     \{\par
+83     {\cf20 //TODO (optional) calculate mean, variance, standard deviation for measuring appropriateness}\par
+84     srand(({\cf18 unsigned} {\cf18 int}) time(NULL)); {\cf20 // init random generator}\par
+85 \par
+86     {\cf19 if} (strcmp(option, {\cf22 "zero"}) == 0) \{\par
+87         {\cf20 // probably not a good init option}\par
+88     \} {\cf19 else} {\cf19 if} (strcmp(option, {\cf22 "random"}) == 0) \{\par
+89         {\cf19 for} ({\cf18 int} i = 0; i < nn->layers[layerNum].nNodes; i++) \{ {\cf20 // for each NODE in layer init weights}\par
+90             {\cf19 if} (layerNum == 0) \{ {\cf20 // first layer # of weights should = # of inputs}\par
+91                 nn->layers[layerNum].nodes[i].weights = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
+92                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
+93                 {\cf19 if} (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) \{ printf({\cf22 "Error: Failed to allocate memory!"}); {\cf19 return} 1; \}\par
+94                 {\cf19 for} ({\cf18 int} j = 0; j < nn->inShape; j++) \{ {\cf20 // for each WEIGHT in node}\par
+95                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / (({\cf18 double}) RAND_MAX + 1.0));\par
+96                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;\par
+97                 \}\par
+98             \} {\cf19 else} \{  {\cf20 // # of weights should = previous layer # of nodes}\par
+99                 nn->layers[layerNum].nodes[i].weights = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->layers[layerNum - 1].nNodes); {\cf20 // not freed}\par
+100                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc({\cf17 sizeof}({\cf18 float}) * ({\cf18 unsigned} {\cf18 int}) nn->inShape); {\cf20 // not freed}\par
+101                 {\cf19 if} (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) \{ printf({\cf22 "Error: Failed to allocate memory!"}); {\cf19 return} 1; \}\par
+102                 {\cf19 for} ({\cf18 int} j = 0; j < nn->layers[layerNum - 1].nNodes; j++) \{ {\cf20 // for each WEIGHT in node}\par
+103                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / (({\cf18 double}) RAND_MAX + 1.0));\par
+104                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;\par
+105                 \}\par
+106             \}\par
+107             nn->layers[layerNum].nodes[i].bias = 0; {\cf20 // bias can be 0}\par
+108             nn->layers[layerNum].nodes[i].biasDerivative = 0;\par
+109             nn->layers[layerNum].nodes[i].AF = nn->layers[layerNum].layerAF; {\cf20 // applies to the whole layer}\par
+110         \}\par
+111     \} {\cf19 else} \{\par
+112         printf({\cf22 "Error: Unknown initialization method."});\par
+113         {\cf19 return} 1;\par
+114     \}\par
+115 \par
+116     {\cf19 return} 0;\par
+117 \}\par
 }
 }
 \par \pard\plain 
@@ -2002,23 +2003,22 @@ Go to the documentation of this file.\par
 51     {\cf18 string} opt; \par
 52     {\cf18 float} lr; \par
 53     {\cf18 int} epochs; \par
-55     {\cf18 float} *labels; \par
-56     Layer *layers; \par
-57 \} NeuralNetwork;\par
+55     Layer *layers; \par
+56 \} NeuralNetwork;\par
+57 \par
 58 \par
-59 \par
-60 {\cf18 int} CNeural_init(NeuralNetwork *nn, {\cf18 int} inputShape, {\cf18 int} outputShape, {\cf18 int} numLayers, {\cf18 int} layerNumNodes[], {\cf18 string} layersAF[], {\cf18 string} initMethod);\par
-61 {\cf18 void} CNeural_clear_nodeResults(NeuralNetwork *nn, {\cf18 int} layerNum);\par
-62 {\cf18 int} CNeural_wb_init(NeuralNetwork *nn, {\cf18 int} layerNum, {\cf18 string} option);\par
-63 {\cf18 void} CNeural_train(NeuralNetwork *nn, {\cf18 int} numLabels, {\cf18 float} inputs[numLabels][nn->inShape], {\cf18 float} labels[numLabels][nn->outShape], {\cf18 string} lossFunction, {\cf18 string} optimizer, {\cf18 float} learningRate, {\cf18 int} epochs);\par
-64 {\cf18 float} CNeural_activation({\cf18 float} input, {\cf18 string} af);\par
-65 {\cf18 float} CNeural_loss({\cf18 float} predicted[], {\cf18 float} actual[], {\cf18 int} outputShape, {\cf18 string} lfn);\par
-66 {\cf18 void} CNeural_free(NeuralNetwork *nn);\par
-67 \par
-68 {\cf18 void} CNeural_derivatives(NeuralNetwork *nn, {\cf18 float} inputs[], {\cf18 float} labels[], {\cf18 string} lossFunction);\par
-69 {\cf18 float} CNeural_af_derivative({\cf18 float} input, {\cf18 string} af);\par
-70 {\cf18 float} CNeural_loss_derivative({\cf18 float} predicted, {\cf18 float} actual, {\cf18 string} lfn);\par
-71 {\cf21 #endif }{\cf20 //CNEURAL_H}\par
+59 {\cf18 int} CNeural_init(NeuralNetwork *nn, {\cf18 int} inputShape, {\cf18 int} outputShape, {\cf18 int} numLayers, {\cf18 int} layerNumNodes[], {\cf18 string} layersAF[], {\cf18 string} initMethod);\par
+60 {\cf18 void} CNeural_clear_nodeResults(NeuralNetwork *nn, {\cf18 int} layerNum);\par
+61 {\cf18 int} CNeural_wb_init(NeuralNetwork *nn, {\cf18 int} layerNum, {\cf18 string} option);\par
+62 {\cf18 void} CNeural_train(NeuralNetwork *nn, {\cf18 int} numLabels, {\cf18 float} inputs[numLabels][nn->inShape], {\cf18 float} labels[numLabels][nn->outShape], {\cf18 string} lossFunction, {\cf18 string} optimizer, {\cf18 float} learningRate, {\cf18 int} epochs);\par
+63 {\cf18 float} CNeural_activation({\cf18 float} input, {\cf18 string} af);\par
+64 {\cf18 float} CNeural_loss({\cf18 float} predicted[], {\cf18 float} actual[], {\cf18 int} outputShape, {\cf18 string} lfn);\par
+65 {\cf18 void} CNeural_free(NeuralNetwork *nn);\par
+66 \par
+67 {\cf18 void} CNeural_derivatives(NeuralNetwork *nn, {\cf18 float} inputs[], {\cf18 float} labels[], {\cf18 string} lossFunction);\par
+68 {\cf18 float} CNeural_af_derivative({\cf18 float} input, {\cf18 string} af);\par
+69 {\cf18 float} CNeural_loss_derivative({\cf18 float} predicted, {\cf18 float} actual, {\cf18 string} lfn);\par
+70 {\cf21 #endif }{\cf20 //CNEURAL_H}\par
 }
 \par \pard\plain 
 

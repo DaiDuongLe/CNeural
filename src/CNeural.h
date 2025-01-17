@@ -52,7 +52,6 @@ typedef struct {
     float lr; /**< learning rate */
     int epochs; /**< number of epochs (forward passes through the whole dataset) */
 
-    float *labels; /**< array of labels for training */
     Layer *layers; /**< array of layers */
 } NeuralNetwork;
 
