@@ -29,7 +29,8 @@ $ ./CNeural
 - **Compile** with GCC
 
 ```bash
-$ gcc CNeural.c CNeural_backpropagation.c -lm
+$ cd CNeural/src
+$ gcc main.c CNeural.c CNeural_backpropagation.c -lm
 ```
 ## PVA Requirements
 Name: Dai Duong Le  
