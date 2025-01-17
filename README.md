@@ -20,7 +20,10 @@ $ git clone https://github.com/DaiDuongLe/CNeural.git
 - **Build** the CMake project
 
 ```bash
-$ cmake --build
+$ cd CNeural
+$ cmake .
+$ cmake --build .
+$ ./CNeural
 ```
 
 - **Compile** with GCC
