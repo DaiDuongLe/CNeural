@@ -33,7 +33,7 @@
  * @param outputShape output number of nodes
  * @param numLayers number of layers
  * @param layerNumNodes array with each layer's number of nodes
- * @param layersAF layer activation function
+ * @param layersAF array with each layer's activation function
  * @param initMethod initialization method
  * @return returns 0 for success
 */

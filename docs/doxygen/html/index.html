@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CNeural: Main Page</title>
+<title>CNeural: CNeural</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,10 +84,50 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">CNeural Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">CNeural </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p>CNeural is a simple implementation of a deep neural network in C.</p>
+<p><a href="https://cmake.org/">CMake</a> is the build system for this project, however a compiler (such as GCC or Clang) is sufficient. <br  />
+ Documentation is generated using <a href="https://www.doxygen.nl/">doxygen</a>.</p>
+<h2><a class="anchor" id="autotoc_md0"></a>
+Navigation</h2>
+<ul>
+<li>The data structure layout can be found under <code>Data Structures</code> <br  />
+</li>
+<li>Source code and its documentation under <code>Files</code></li>
+<li>Each function has a description of itself, <b>parameters</b> and <b>return values</b></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Requirements</h2>
+<ul>
+<li>Tested on<ul>
+<li>MinGW 11.0 w64 with C11 (Windows 11 -amd64), with CMake 3.30.5</li>
+<li>gcc 13.3.1 with C18 (Gentoo Linux -x86_64), with and without CMake</li>
+<li>gcc 13.2.0 with C18 (Ubuntu -aarch64), with and without CMake</li>
+</ul>
+</li>
+<li>CMake =&gt; 3.30</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Usage/Examples</h2>
+<ul>
+<li>Provided is an example <code><a class="el" href="main_8c.html" title="Example use of CNeural.">main.c</a></code> under <code>/src</code> <div class="fragment"><div class="line">$ git clone https://github.com/DaiDuongLe/CNeural.git</div>
+</div><!-- fragment --></li>
+<li><p class="startli"><b>Build</b> the CMake project</p>
+<div class="fragment"><div class="line">$ cd CNeural</div>
+<div class="line">$ cmake .</div>
+<div class="line">$ cmake --build .</div>
+<div class="line">$ ./CNeural</div>
+</div><!-- fragment --></li>
+<li><p class="startli"><b>Compile</b> with GCC</p>
+<div class="fragment"><div class="line">$ cd CNeural/src</div>
+<div class="line">$ gcc main.c CNeural.c CNeural_backpropagation.c -lm -o main</div>
+<div class="line">$ ./main</div>
+</div><!-- fragment --> </li>
+</ul>
+</div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->
 <!-- start footer part -->

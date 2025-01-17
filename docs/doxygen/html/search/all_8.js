@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['weightderivatives_0',['weightDerivatives',['../struct_node.html#a7889b6dae6203cb1fac963e1c9cece25',1,'Node']]],
-  ['weightedsum_1',['weightedSum',['../struct_layer.html#af295f7e716b58e4c39174754f1a1293a',1,'Layer']]],
-  ['weights_2',['weights',['../struct_node.html#a210dc23584593727ddf26671264aa16a',1,'Node']]]
+  ['opt_0',['opt',['../struct_neural_network.html#a2d62ba85ba6e1ecc078bb70d8ec593dd',1,'NeuralNetwork']]],
+  ['outshape_1',['outShape',['../struct_neural_network.html#a3d7e7ab8cfa05cf27aed0f1e1132d997',1,'NeuralNetwork']]]
 ];

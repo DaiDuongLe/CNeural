@@ -1,7 +1,10 @@
-//
-// Created by Dai Duong Le.
-//
-
+/**
+ * \file main.c
+ * \brief Example use of CNeural.
+ *
+ * \author Dai Duong Le
+ * \version: 0.0.1
+*/
 #include <stdio.h>
 #include <time.h>
 #include "CNeural.h"
