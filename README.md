@@ -1,4 +1,3 @@
-
 # CNeural
 
 CNeural is a simple implementation of a deep neural network in C.
@@ -12,9 +11,12 @@ Documentation is generated using [doxygen](https://www.doxygen.nl/).
 
 The documentation is available in `docs/doxygen/html` in HTML format under `index.html` [here](https://github.com/DaiDuongLe/CNeural/tree/main/) or RTF (Rich Text Format) in `docs/doxygen/rtf` under `refman.rtf` [here](https://github.com/DaiDuongLe/CNeural/tree/main/docs/doxygen/html). 
 
-
+For RTF it is recommended to open using MS Word.
 ## Usage/Examples
 - Provided is an example `main.c` under `/src`
+```
+$ git clone https://github.com/DaiDuongLe/CNeural.git
+```
 - **Build** the CMake project
 
 ```bash
@@ -63,4 +65,4 @@ Requirements: Implement a neural network in C
     - Implement predition feature with proper label handling
     - Saving parameters to a standardized format
 - Low priority:
-    - GUI interface
+    - GUI interface using Clay
