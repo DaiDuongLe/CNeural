@@ -65,6 +65,7 @@ Requirements: Implement a neural network in C
 - Understanding neural networks on a fundamental level
 - Neural Network data structure
 - Configurable Forward propagation 
+- Backpropagation of 1 layer with successful convergence
 - Increased proficiency in C and documentation using doxygen.  
 
 ### Next steps/goals:
@@ -73,7 +74,6 @@ Requirements: Implement a neural network in C
     - Add more initialization options to weights & biases
 - Backpropagation:
     - Calculate gradient of hidden layers
-    - Update weights
 - Data import:
     - Import MNIST dataset
 - Prediction:

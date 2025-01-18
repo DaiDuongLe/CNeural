@@ -3,7 +3,7 @@
  * \brief Example use of CNeural.
  *
  * \author Dai Duong Le
- * \version: 0.0.1
+ * \version: 0.1.0
 */
 #include <stdio.h>
 #include <time.h>
@@ -16,7 +16,7 @@ int main() {
 
     int inputShape = 1;
     int outputShape = 1;
-    int numLabels = 3;
+    int numLabels = 10; // same as features
     int numLayers = 1; // MUST be the same # of elements as in eachLayer[]
     int eachLayer[] = {1}; // should include output layer as well, the same as outputShape
     string afs[] = {"none"}; // will not return 0 (error) when # of elements is < than # of layers, only checks for unknown af (strings)
@@ -27,23 +27,42 @@ int main() {
     }
 
     // equation for calculating Celsius to Fahrenheit with 1 node
-    ctof.layers[0].nodes[0].weights[0] = (float) 1.8;
-    ctof.layers[0].nodes[0].bias = 32;
+    // ctof.layers[0].nodes[0].weights[0] = (float) 1.8;
+    // ctof.layers[0].nodes[0].bias = 32;
 
-    float features[3][1] = {
-        {-273},
+    float features[10][1] = {
+        // {-273},
+        {-40},
+        {-10},
         {0},
-        {21},
-        // {100}
+        {8},
+        {15},
+        {22},
+        {38},
+        {45},
+        {60},
+        {80}
     };
-    float labels[3][1] = {
-        {(float) -459.4},
+    float labels[10][1] = {
+        // {(float) -459.4},
+        {-40},
+        {14},
         {32},
-        {(float) 69.8},
-        // {212}
+        {46},
+        {59},
+        {72},
+        {100},
+        {113},
+        {140},
+        {176}
     };
 
-    CNeural_train(&ctof, numLabels, features, labels, "mse", "sgd", (float) 0.1, 100);
+    printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
+    printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
+
+    CNeural_train(&ctof, numLabels, features, labels, "mse", "sgd", (float) 0.000005, 1000); // optimizer not implemented yet
+    printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
+    printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
     CNeural_free(&ctof);
 
     clock_t stop = clock();

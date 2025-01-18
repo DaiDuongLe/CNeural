@@ -3,7 +3,7 @@
  * \brief Source file for CNeural, containing function definitions.
  *
  * \author Dai Duong Le
- * \version: 0.0.1
+ * \version: 0.1.0
 */
 
 #include <stdio.h>
@@ -124,6 +124,7 @@ int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
 */
 void CNeural_clear_nodeResults(NeuralNetwork *nn, int layerNum) {
     for (int i = 0; i < nn->layers[layerNum].nNodes; i++) {
+        nn->layers[layerNum].weightedSum[i] = 0; // and weightedSum
         nn->layers[layerNum].nodesResults[i] = 0;
     }
 }
@@ -165,6 +166,7 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
                     if (layerNum == 0) { // 1st layer # of weights should = # of inputs
                         for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
                             // printf("\t\tWeight %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weights[weightNum]);
+                            // printf("\t\tWeightder %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weightDerivatives[weightNum]);
                             nn->layers[layerNum].nodesResults[nodeNum] +=
                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * inputs[label][weightNum]; // adds for each linear combination (weighted sum)
 
@@ -178,6 +180,7 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
                             // printf("Noderes value: %f\n", nn->layers[layerNum].nodesResults[nodeNum]);
                         }
                     }
+                    // printf("\t\tBiasder: %f ", nn->layers[0].nodes[nodeNum].biasDerivative);
                     nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
                     // printf("\n");
                     // printf("\t\tAfter bias: %f\n", nn->layers[layerNum].nodesResults[nodeNum]);
@@ -194,7 +197,9 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
 
             nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf);
 
-            // CNeural_derivatives()
+            // TODO implement optimizer flexibility (currently only gradient des.)
+            CNeural_derivatives(nn, inputs[label], labels[label], "mse");
+            // printf("\n");
 
             for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) { // clear after each label
                 CNeural_clear_nodeResults(nn, layerNum);
@@ -204,8 +209,13 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
         printf("Loss: %f\n", nn->loss);
         printf("\n");
 
-    }
+        if (nn->loss < 20) { // early stopping
+            return;
+        }
+        CNeural_update_weights(nn);
 
+
+    }
 }
 
 /**

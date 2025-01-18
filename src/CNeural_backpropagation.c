@@ -3,7 +3,7 @@
  * \brief Source file for CNeural backpropagation, containing function definitions.
  *
  * \author Dai Duong Le
- * \version: 0.0.1
+ * \version: 0.1.0
 */
 
 #include "CNeural.h"
@@ -22,18 +22,53 @@
 void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], string lossFunction) {
     for (int layerNum = nn->nLayers - 1; layerNum >= 0; layerNum--) {
         for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
-            if (layerNum == 0) {   // first layer (last layer in backprop)
-                for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
-
+            if (layerNum == 0) { // first layer (last layer in backprop)
+                if (nn->nLayers == 1) { // if there's only 1 layer
+                    for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
+                        float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum];
+                        // printf("WeightderBEFORE: %f\n", previousDerivative);
+                        float currentDerivative = (float) 1.0/(float) nn->nLabels * inputs[weightNum] * CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * CNeural_loss_derivative(nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction);
+                        // printf("WeightderCURRENT: %f\n", currentDerivative);
+                        nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum] = previousDerivative + currentDerivative;
+                    }
+                    float previousDerivative = nn->layers[layerNum].nodes[nodeNum].biasDerivative;
+                    // printf("BiasderPREVIOUS: %f\n", previousDerivative);
+                    float currentDerivative = (float) 1.0/(float) nn->nLabels * CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * CNeural_loss_derivative(nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction);
+                    // printf("BiasderCURRENT: %f\n", currentDerivative);
+                    nn->layers[layerNum].nodes[nodeNum].biasDerivative = previousDerivative + currentDerivative;
                 }
-            } else if (layerNum == nn->nLayers - 1) { // last layers
+
+            } else if (layerNum == nn->nLayers - 1) { // last layers (first layer in backprop)
                 for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
                     nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum] = nn->layers[layerNum-1].nodesResults[weightNum] * CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * CNeural_loss_derivative(nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction);
+                    // printf("Weightder: %f", nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum]);
                 }
                 // bias
             } else { // middle layers
 
             }
+        }
+    }
+}
+
+/**
+ * Updates weights and biases based on the calculated gradient and applies its negative.
+ *
+ * @param nn neural network type
+ */
+void CNeural_update_weights(NeuralNetwork *nn) {
+    for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
+        for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
+            if (layerNum == 0) { // 1st layer # of weights should = # of inputs
+                for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
+                    nn->layers[layerNum].nodes[nodeNum].weights[weightNum] += nn->lr * -nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum]; // negative gradient (downhill direction)
+                }
+            } else {  // # of weights should = previous layer # of nodes
+                for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
+                    nn->layers[layerNum].nodes[nodeNum].weights[weightNum] += nn->lr * -nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum]; // negative gradient (downhill direction)
+                }
+            }
+            nn->layers[layerNum].nodes[nodeNum].bias += nn->lr * -nn->layers[layerNum].nodes[nodeNum].biasDerivative; // negative gradient (downhill direction)
         }
     }
 }

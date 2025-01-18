@@ -3,7 +3,7 @@
  * \brief Header file for CNeural, containing data structures and function declarations.
  *
  * \author Dai Duong Le
- * \version: 0.0.1
+ * \version: 0.1.0
 */
 
 #ifndef CNEURAL_H
@@ -65,6 +65,7 @@ float CNeural_loss(float predicted[], float actual[], int outputShape, string lf
 void CNeural_free(NeuralNetwork *nn);
 
 void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], string lossFunction);
+void CNeural_update_weights(NeuralNetwork *nn);
 float CNeural_af_derivative(float input, string af);
 float CNeural_loss_derivative(float predicted, float actual, string lfn);
 #endif //CNEURAL_H
