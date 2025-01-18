@@ -132,13 +132,13 @@ void CNeural_clear_nodeResults(NeuralNetwork *nn, int layerNum) {
  * Trains a neural network using the specified parameters.
  *
  * Weighted sums get forward propagated (forward pass) by calculating linear combinations and applying an activation function for each node in each layer.
- * After all the training examples go through 1 epoch, the loss and gradient are calculated based on the optimizer.
+ * After all the training examples go through 1 epoch, the gradient and loss are calculated based on the optimizer.
  * Neural network parameters are adjusted with the learning rate accordingly.
  *
  * @param nn neural network type
  * @param numLabels number of labels (training examples)
- * @param inputs array of inputs (features)
- * @param labels array of labels
+ * @param inputs 2D array of inputs (features)
+ * @param labels 2D array of labels
  * @param lossFunction a string corresponding to a loss function
  * @param optimizer a string corresponding to an optimizer
  * @param learningRate learning rate to be applied in gradient descent
