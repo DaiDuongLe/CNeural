@@ -97,7 +97,7 @@ int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
                 }
             } else {  // # of weights should = previous layer # of nodes
                 nn->layers[layerNum].nodes[i].weights = malloc(sizeof(float) * (unsigned int) nn->layers[layerNum - 1].nNodes);
-                nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->inShape);
+                nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->layers[layerNum - 1].nNodes);
                 if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
                 for (int j = 0; j < nn->layers[layerNum - 1].nNodes; j++) { // for each WEIGHT in node
                     nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / ((double) RAND_MAX + 1.0));

@@ -7,7 +7,7 @@ Documentation is generated using [doxygen](https://www.doxygen.nl/).
 ## Documentation
 The documentation is available in `docs/doxygen/html` in HTML format under `index.html` [here](https://github.com/DaiDuongLe/CNeural/tree/main/docs/doxygen/html) or RTF (Rich Text Format) in `docs/doxygen/rtf` under `refman.rtf` [here](https://github.com/DaiDuongLe/CNeural/tree/main/docs/doxygen/rtf). 
 
-For RTF it is recommended to open using MS Word.
+For RTF it is recommended to be opened using MS Word.
 
 ## Requirements
 - Tested on
