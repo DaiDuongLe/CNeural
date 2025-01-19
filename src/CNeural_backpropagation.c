@@ -3,7 +3,7 @@
  * \brief Source file for CNeural backpropagation, containing function definitions.
  *
  * \author Dai Duong Le
- * \version: 0.1.0
+ * \version: 0.1.1
 */
 
 #include "CNeural.h"
@@ -37,7 +37,6 @@ void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], stri
                     // printf("BiasderCURRENT: %f\n", currentDerivative);
                     nn->layers[layerNum].nodes[nodeNum].biasDerivative = previousDerivative + currentDerivative;
                 }
-
             } else if (layerNum == nn->nLayers - 1) { // last layers (first layer in backprop)
                 for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
                     nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum] = nn->layers[layerNum-1].nodesResults[weightNum] * CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * CNeural_loss_derivative(nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction);
@@ -55,7 +54,7 @@ void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], stri
  * Updates weights and biases based on the calculated gradient and applies its negative.
  *
  * @param nn neural network type
- */
+*/
 void CNeural_update_weights(NeuralNetwork *nn) {
     for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
         for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {

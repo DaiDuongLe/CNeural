@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">CNeural<span id="projectnumber">&#160;0.1.0</span>
+   <div id="projectname">CNeural<span id="projectnumber">&#160;0.1.1</span>
    </div>
    <div id="projectbrief">Simple Neural Network implementation in C</div>
   </td>
@@ -119,8 +119,8 @@ Functions</h2></td></tr>
 <tr class="separator:a0aa2f47738cf9d7b51ac50610ac15732"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a022976e5525b33c51cb7a19c5242569b" id="r_a022976e5525b33c51cb7a19c5242569b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a022976e5525b33c51cb7a19c5242569b">CNeural_clear_nodeResults</a> (<a class="el" href="struct_neural_network.html">NeuralNetwork</a> *nn, int layerNum)</td></tr>
 <tr class="separator:a022976e5525b33c51cb7a19c5242569b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af73d47e410cdd064fa6e1ebc1a352337" id="r_af73d47e410cdd064fa6e1ebc1a352337"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af73d47e410cdd064fa6e1ebc1a352337">CNeural_train</a> (<a class="el" href="struct_neural_network.html">NeuralNetwork</a> *nn, int numLabels, float inputs[numLabels][nn-&gt;inShape], float labels[numLabels][nn-&gt;outShape], string lossFunction, string optimizer, float learningRate, int epochs)</td></tr>
-<tr class="separator:af73d47e410cdd064fa6e1ebc1a352337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3051c713b8a0f33d99881cc5516b9d1" id="r_aa3051c713b8a0f33d99881cc5516b9d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3051c713b8a0f33d99881cc5516b9d1">CNeural_train</a> (<a class="el" href="struct_neural_network.html">NeuralNetwork</a> *nn, int numLabels, float inputs[numLabels][nn-&gt;inShape], float labels[numLabels][nn-&gt;outShape], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss)</td></tr>
+<tr class="separator:aa3051c713b8a0f33d99881cc5516b9d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a991bd7f50a4a9972dc8c8089eae534f3" id="r_a991bd7f50a4a9972dc8c8089eae534f3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a991bd7f50a4a9972dc8c8089eae534f3">CNeural_activation</a> (float input, string af)</td></tr>
 <tr class="separator:a991bd7f50a4a9972dc8c8089eae534f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9af994b51c3eb2ed0df0e2040e3eb1c" id="r_ad9af994b51c3eb2ed0df0e2040e3eb1c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9af994b51c3eb2ed0df0e2040e3eb1c">CNeural_loss</a> (float predicted[], float actual[], int outputShape, string lfn)</td></tr>
@@ -131,7 +131,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Source file for CNeural, containing function definitions. </p>
 <dl class="section author"><dt>Author</dt><dd>Dai Duong Le </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>: 0.1.0 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>: 0.1.1 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a991bd7f50a4a9972dc8c8089eae534f3" name="a991bd7f50a4a9972dc8c8089eae534f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a991bd7f50a4a9972dc8c8089eae534f3">&#9670;&#160;</a></span>CNeural_activation()</h2>
@@ -160,22 +160,22 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>processed value by the activation </dd></dl>
-<div class="fragment"><div class="line"><span class="lineno">  228</span>                                                 {</div>
-<div class="line"><span class="lineno">  229</span>    <span class="keywordflow">if</span> (strcmp(af, <span class="stringliteral">&quot;none&quot;</span>) == 0) <span class="keywordflow">return</span> input;</div>
-<div class="line"><span class="lineno">  230</span> </div>
-<div class="line"><span class="lineno">  231</span>    <span class="keywordflow">if</span> (strcmp(af, <span class="stringliteral">&quot;sigmoid&quot;</span>) == 0) {</div>
-<div class="line"><span class="lineno">  232</span>        <span class="keywordflow">return</span> 1 / (1 + expf(-input));</div>
-<div class="line"><span class="lineno">  233</span>    }</div>
-<div class="line"><span class="lineno">  234</span>    <span class="keywordflow">if</span> (strcmp(af, <span class="stringliteral">&quot;tanh&quot;</span>) == 0) {</div>
-<div class="line"><span class="lineno">  235</span>        <span class="keywordflow">return</span> tanhf(input);</div>
-<div class="line"><span class="lineno">  236</span>    }</div>
-<div class="line"><span class="lineno">  237</span>    <span class="keywordflow">if</span> (strcmp(af, <span class="stringliteral">&quot;relu&quot;</span>) == 0) {</div>
-<div class="line"><span class="lineno">  238</span>        <span class="keywordflow">return</span> fmaxf(0, input);</div>
-<div class="line"><span class="lineno">  239</span>    }</div>
-<div class="line"><span class="lineno">  240</span>    printf(<span class="stringliteral">&quot;Warning: Unknown activation function. Training results might not be optimal!\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  241</span>    printf(<span class="stringliteral">&quot;Defaulting to ReLu\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  242</span>    <span class="keywordflow">return</span> fmaxf(0, input);</div>
-<div class="line"><span class="lineno">  243</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">  229</span>                                                 {</div>
+<div class="line"><span class="lineno">  230</span>    <span class="keywordflow">if</span> (strcmp(af, <span class="stringliteral">&quot;none&quot;</span>) == 0) <span class="keywordflow">return</span> input;</div>
+<div class="line"><span class="lineno">  231</span> </div>
+<div class="line"><span class="lineno">  232</span>    <span class="keywordflow">if</span> (strcmp(af, <span class="stringliteral">&quot;sigmoid&quot;</span>) == 0) {</div>
+<div class="line"><span class="lineno">  233</span>        <span class="keywordflow">return</span> 1 / (1 + expf(-input));</div>
+<div class="line"><span class="lineno">  234</span>    }</div>
+<div class="line"><span class="lineno">  235</span>    <span class="keywordflow">if</span> (strcmp(af, <span class="stringliteral">&quot;tanh&quot;</span>) == 0) {</div>
+<div class="line"><span class="lineno">  236</span>        <span class="keywordflow">return</span> tanhf(input);</div>
+<div class="line"><span class="lineno">  237</span>    }</div>
+<div class="line"><span class="lineno">  238</span>    <span class="keywordflow">if</span> (strcmp(af, <span class="stringliteral">&quot;relu&quot;</span>) == 0) {</div>
+<div class="line"><span class="lineno">  239</span>        <span class="keywordflow">return</span> fmaxf(0, input);</div>
+<div class="line"><span class="lineno">  240</span>    }</div>
+<div class="line"><span class="lineno">  241</span>    printf(<span class="stringliteral">&quot;Warning: Unknown activation function. Training results might not be optimal!\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  242</span>    printf(<span class="stringliteral">&quot;Defaulting to ReLu\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  243</span>    <span class="keywordflow">return</span> fmaxf(0, input);</div>
+<div class="line"><span class="lineno">  244</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -239,18 +239,18 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="lineno">  284</span>                                     {</div>
-<div class="line"><span class="lineno">  285</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a3abc7b8de02ee8b93ba8f20615375077">nLayers</a>; i++) {</div>
-<div class="line"><span class="lineno">  286</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#ab5242add5962116d4d46270da25895b3">nNodes</a>; j++) {</div>
-<div class="line"><span class="lineno">  287</span>            free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>-&gt;<a class="code hl_variable" href="struct_node.html#a210dc23584593727ddf26671264aa16a">weights</a>);</div>
-<div class="line"><span class="lineno">  288</span>            free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>-&gt;<a class="code hl_variable" href="struct_node.html#a7889b6dae6203cb1fac963e1c9cece25">weightDerivatives</a>);</div>
-<div class="line"><span class="lineno">  289</span>        }</div>
-<div class="line"><span class="lineno">  290</span>        free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>);</div>
-<div class="line"><span class="lineno">  291</span>        free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#af295f7e716b58e4c39174754f1a1293a">weightedSum</a>);</div>
-<div class="line"><span class="lineno">  292</span>        free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>);</div>
-<div class="line"><span class="lineno">  293</span>    }</div>
-<div class="line"><span class="lineno">  294</span>    free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>);</div>
-<div class="line"><span class="lineno">  295</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">  285</span>                                     {</div>
+<div class="line"><span class="lineno">  286</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a3abc7b8de02ee8b93ba8f20615375077">nLayers</a>; i++) {</div>
+<div class="line"><span class="lineno">  287</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#ab5242add5962116d4d46270da25895b3">nNodes</a>; j++) {</div>
+<div class="line"><span class="lineno">  288</span>            free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>-&gt;<a class="code hl_variable" href="struct_node.html#a210dc23584593727ddf26671264aa16a">weights</a>);</div>
+<div class="line"><span class="lineno">  289</span>            free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>-&gt;<a class="code hl_variable" href="struct_node.html#a7889b6dae6203cb1fac963e1c9cece25">weightDerivatives</a>);</div>
+<div class="line"><span class="lineno">  290</span>        }</div>
+<div class="line"><span class="lineno">  291</span>        free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>);</div>
+<div class="line"><span class="lineno">  292</span>        free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#af295f7e716b58e4c39174754f1a1293a">weightedSum</a>);</div>
+<div class="line"><span class="lineno">  293</span>        free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[i].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>);</div>
+<div class="line"><span class="lineno">  294</span>    }</div>
+<div class="line"><span class="lineno">  295</span>    free(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>);</div>
+<div class="line"><span class="lineno">  296</span>}</div>
 <div class="ttc" id="astruct_layer_html_a07852b120b06d9f9e9609d7db5fb07ae"><div class="ttname"><a href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">Layer::nodes</a></div><div class="ttdeci">Node * nodes</div><div class="ttdef"><b>Definition</b> CNeural.h:34</div></div>
 <div class="ttc" id="astruct_neural_network_html_a3abc7b8de02ee8b93ba8f20615375077"><div class="ttname"><a href="struct_neural_network.html#a3abc7b8de02ee8b93ba8f20615375077">NeuralNetwork::nLayers</a></div><div class="ttdeci">int nLayers</div><div class="ttdef"><b>Definition</b> CNeural.h:46</div></div>
 <div class="ttc" id="astruct_node_html_a210dc23584593727ddf26671264aa16a"><div class="ttname"><a href="struct_node.html#a210dc23584593727ddf26671264aa16a">Node::weights</a></div><div class="ttdeci">float * weights</div><div class="ttdef"><b>Definition</b> CNeural.h:19</div></div>
@@ -397,35 +397,35 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>loss value </dd></dl>
-<div class="fragment"><div class="line"><span class="lineno">  254</span>                                                                                   {</div>
-<div class="line"><span class="lineno">  255</span>    <span class="keywordflow">if</span> (strcmp(lfn, <span class="stringliteral">&quot;mse&quot;</span>) == 0) { <span class="comment">// Mean Squared Error</span></div>
-<div class="line"><span class="lineno">  256</span>        <span class="keywordtype">float</span> sum = 0;</div>
-<div class="line"><span class="lineno">  257</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; outputShape; i++) {</div>
-<div class="line"><span class="lineno">  258</span>            sum += powf(predicted[i] - actual[i], 2);</div>
-<div class="line"><span class="lineno">  259</span>        }</div>
-<div class="line"><span class="lineno">  260</span>        <span class="keywordflow">return</span> sum;</div>
-<div class="line"><span class="lineno">  261</span>    }</div>
-<div class="line"><span class="lineno">  262</span>    <span class="keywordflow">if</span> (strcmp(lfn, <span class="stringliteral">&quot;mae&quot;</span>) == 0) { <span class="comment">// Mean Average Error</span></div>
-<div class="line"><span class="lineno">  263</span>        <span class="keywordtype">float</span> sum = 0;</div>
-<div class="line"><span class="lineno">  264</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; outputShape; i++) {</div>
-<div class="line"><span class="lineno">  265</span>            sum += fabsf(predicted[i] - actual[i]);</div>
-<div class="line"><span class="lineno">  266</span>        }</div>
-<div class="line"><span class="lineno">  267</span>        <span class="keywordflow">return</span> sum;</div>
-<div class="line"><span class="lineno">  268</span>    }</div>
-<div class="line"><span class="lineno">  269</span> </div>
-<div class="line"><span class="lineno">  270</span>    printf(<span class="stringliteral">&quot;Warning: Unknown loss function. Training results might not be optimal!\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  271</span>    printf(<span class="stringliteral">&quot;Defaulting to MSE\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  272</span>    <span class="keywordtype">float</span> sum = 0;</div>
-<div class="line"><span class="lineno">  273</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; outputShape; i++) {</div>
-<div class="line"><span class="lineno">  274</span>        sum += powf(predicted[i] - actual[i], 2);</div>
-<div class="line"><span class="lineno">  275</span>    }</div>
-<div class="line"><span class="lineno">  276</span>    <span class="keywordflow">return</span> sum;</div>
-<div class="line"><span class="lineno">  277</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">  255</span>                                                                                   {</div>
+<div class="line"><span class="lineno">  256</span>    <span class="keywordflow">if</span> (strcmp(lfn, <span class="stringliteral">&quot;mse&quot;</span>) == 0) { <span class="comment">// Mean Squared Error</span></div>
+<div class="line"><span class="lineno">  257</span>        <span class="keywordtype">float</span> sum = 0;</div>
+<div class="line"><span class="lineno">  258</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; outputShape; i++) {</div>
+<div class="line"><span class="lineno">  259</span>            sum += powf(predicted[i] - actual[i], 2);</div>
+<div class="line"><span class="lineno">  260</span>        }</div>
+<div class="line"><span class="lineno">  261</span>        <span class="keywordflow">return</span> sum;</div>
+<div class="line"><span class="lineno">  262</span>    }</div>
+<div class="line"><span class="lineno">  263</span>    <span class="keywordflow">if</span> (strcmp(lfn, <span class="stringliteral">&quot;mae&quot;</span>) == 0) { <span class="comment">// Mean Average Error</span></div>
+<div class="line"><span class="lineno">  264</span>        <span class="keywordtype">float</span> sum = 0;</div>
+<div class="line"><span class="lineno">  265</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; outputShape; i++) {</div>
+<div class="line"><span class="lineno">  266</span>            sum += fabsf(predicted[i] - actual[i]);</div>
+<div class="line"><span class="lineno">  267</span>        }</div>
+<div class="line"><span class="lineno">  268</span>        <span class="keywordflow">return</span> sum;</div>
+<div class="line"><span class="lineno">  269</span>    }</div>
+<div class="line"><span class="lineno">  270</span> </div>
+<div class="line"><span class="lineno">  271</span>    printf(<span class="stringliteral">&quot;Warning: Unknown loss function. Training results might not be optimal!\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  272</span>    printf(<span class="stringliteral">&quot;Defaulting to MSE\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  273</span>    <span class="keywordtype">float</span> sum = 0;</div>
+<div class="line"><span class="lineno">  274</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; outputShape; i++) {</div>
+<div class="line"><span class="lineno">  275</span>        sum += powf(predicted[i] - actual[i], 2);</div>
+<div class="line"><span class="lineno">  276</span>    }</div>
+<div class="line"><span class="lineno">  277</span>    <span class="keywordflow">return</span> sum;</div>
+<div class="line"><span class="lineno">  278</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="af73d47e410cdd064fa6e1ebc1a352337" name="af73d47e410cdd064fa6e1ebc1a352337"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af73d47e410cdd064fa6e1ebc1a352337">&#9670;&#160;</a></span>CNeural_train()</h2>
+<a id="aa3051c713b8a0f33d99881cc5516b9d1" name="aa3051c713b8a0f33d99881cc5516b9d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3051c713b8a0f33d99881cc5516b9d1">&#9670;&#160;</a></span>CNeural_train()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -468,7 +468,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>epochs</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>epochs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>earlyStopLoss</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -484,85 +489,86 @@ Functions</h2></td></tr>
     <tr><td class="paramname">optimizer</td><td>a string corresponding to an optimizer </td></tr>
     <tr><td class="paramname">learningRate</td><td>learning rate to be applied in gradient descent </td></tr>
     <tr><td class="paramname">epochs</td><td>number of epochs (forward passes through the whole dataset) </td></tr>
+    <tr><td class="paramname">earlyStopLoss</td><td>stop at or below specified loss value </td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="lineno">  148</span>                                                                                                                                                                                                         {</div>
-<div class="line"><span class="lineno">  149</span>    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a833845a223339102f69bf5155d464c83">nLabels</a> = numLabels;</div>
-<div class="line"><span class="lineno">  150</span>    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adc6333dd0a804545cd73763d1efb8d4b">lf</a> = lossFunction;</div>
-<div class="line"><span class="lineno">  151</span>    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a2d62ba85ba6e1ecc078bb70d8ec593dd">opt</a> = optimizer;</div>
-<div class="line"><span class="lineno">  152</span>    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#af49e81211e1db4227a76fe6892392dd1">lr</a> = learningRate;</div>
-<div class="line"><span class="lineno">  153</span>    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a06368f0a1841271faa902c40acb691cf">epochs</a> = epochs;</div>
-<div class="line"><span class="lineno">  154</span> </div>
-<div class="line"><span class="lineno">  155</span>    <span class="comment">// TODO loss and expand activation functions</span></div>
-<div class="line"><span class="lineno">  156</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> epoch = 1; epoch &lt;= nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a06368f0a1841271faa902c40acb691cf">epochs</a>; epoch++) {</div>
-<div class="line"><span class="lineno">  157</span>        printf(<span class="stringliteral">&quot;Epoch %d/%d\n&quot;</span>, epoch, nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a06368f0a1841271faa902c40acb691cf">epochs</a>);</div>
-<div class="line"><span class="lineno">  158</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> label = 0; label &lt; numLabels; label++) {</div>
-<div class="line"><span class="lineno">  159</span>            <span class="comment">// printf(&quot;Label: %d\n&quot;, label + 1);</span></div>
-<div class="line"><span class="lineno">  160</span> </div>
-<div class="line"><span class="lineno">  161</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> layerNum = 0; layerNum &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a3abc7b8de02ee8b93ba8f20615375077">nLayers</a>; layerNum++) {</div>
-<div class="line"><span class="lineno">  162</span>                <span class="comment">// printf(&quot;Layer %d\n&quot;, layerNum + 1);</span></div>
-<div class="line"><span class="lineno">  163</span> </div>
-<div class="line"><span class="lineno">  164</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nodeNum = 0; nodeNum &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#ab5242add5962116d4d46270da25895b3">nNodes</a>; nodeNum++) {</div>
-<div class="line"><span class="lineno">  165</span>                    <span class="comment">// printf(&quot;\tNode %d\n&quot;, nodeNum + 1);</span></div>
-<div class="line"><span class="lineno">  166</span>                    <span class="keywordflow">if</span> (layerNum == 0) { <span class="comment">// 1st layer # of weights should = # of inputs</span></div>
-<div class="line"><span class="lineno">  167</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> weightNum = 0; weightNum &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a32c26fecb5cf2bd18c91622be1096dd1">inShape</a>; weightNum++) {</div>
-<div class="line"><span class="lineno">  168</span>                            <span class="comment">// printf(&quot;\t\tWeight %d: %f &quot;, weightNum + 1, nn-&gt;layers[0].nodes[nodeNum].weights[weightNum]);</span></div>
-<div class="line"><span class="lineno">  169</span>                            <span class="comment">// printf(&quot;\t\tWeightder %d: %f &quot;, weightNum + 1, nn-&gt;layers[0].nodes[nodeNum].weightDerivatives[weightNum]);</span></div>
-<div class="line"><span class="lineno">  170</span>                            nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum] +=</div>
-<div class="line"><span class="lineno">  171</span>                                nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>[nodeNum].<a class="code hl_variable" href="struct_node.html#a210dc23584593727ddf26671264aa16a">weights</a>[weightNum] * inputs[label][weightNum]; <span class="comment">// adds for each linear combination (weighted sum)</span></div>
-<div class="line"><span class="lineno">  172</span> </div>
-<div class="line"><span class="lineno">  173</span>                            <span class="comment">// printf(&quot;Noderes value: %f\n&quot;, nn-&gt;layers[0].nodesResults[nodeNum]);</span></div>
-<div class="line"><span class="lineno">  174</span>                        }</div>
-<div class="line"><span class="lineno">  175</span>                    } <span class="keywordflow">else</span> {  <span class="comment">// # of weights should = previous layer # of nodes</span></div>
-<div class="line"><span class="lineno">  176</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> weightNum = 0; weightNum &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum - 1].<a class="code hl_variable" href="struct_layer.html#ab5242add5962116d4d46270da25895b3">nNodes</a>; weightNum++) {</div>
-<div class="line"><span class="lineno">  177</span>                            <span class="comment">// printf(&quot;\t\tWeight %d: %f \t&quot;, weightNum + 1, nn-&gt;layers[layerNum].nodes[nodeNum].weights[weightNum]);</span></div>
-<div class="line"><span class="lineno">  178</span>                            nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum] +=</div>
-<div class="line"><span class="lineno">  179</span>                                nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>[nodeNum].<a class="code hl_variable" href="struct_node.html#a210dc23584593727ddf26671264aa16a">weights</a>[weightNum] * nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum - 1].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[weightNum]; <span class="comment">// adds for each linear combination (weighted sum)</span></div>
-<div class="line"><span class="lineno">  180</span>                            <span class="comment">// printf(&quot;Noderes value: %f\n&quot;, nn-&gt;layers[layerNum].nodesResults[nodeNum]);</span></div>
-<div class="line"><span class="lineno">  181</span>                        }</div>
-<div class="line"><span class="lineno">  182</span>                    }</div>
-<div class="line"><span class="lineno">  183</span>                    <span class="comment">// printf(&quot;\t\tBiasder: %f &quot;, nn-&gt;layers[0].nodes[nodeNum].biasDerivative);</span></div>
-<div class="line"><span class="lineno">  184</span>                    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum] += nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>[nodeNum].<a class="code hl_variable" href="struct_node.html#ab881305da614121cd59b58172248c151">bias</a>;</div>
-<div class="line"><span class="lineno">  185</span>                    <span class="comment">// printf(&quot;\n&quot;);</span></div>
-<div class="line"><span class="lineno">  186</span>                    <span class="comment">// printf(&quot;\t\tAfter bias: %f\n&quot;, nn-&gt;layers[layerNum].nodesResults[nodeNum]);</span></div>
-<div class="line"><span class="lineno">  187</span> </div>
-<div class="line"><span class="lineno">  188</span>                    <span class="comment">// printf(&quot;\t\tAfter activation: %f\n&quot;, CNeural_activation(nn-&gt;layers[layerNum].nodesResults[nodeNum], nn-&gt;layers[layerNum].nodes[nodeNum].AF));</span></div>
-<div class="line"><span class="lineno">  189</span>                    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#af295f7e716b58e4c39174754f1a1293a">weightedSum</a>[nodeNum] = nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum];</div>
-<div class="line"><span class="lineno">  190</span>                    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum] =</div>
-<div class="line"><span class="lineno">  191</span>                        <a class="code hl_function" href="#a991bd7f50a4a9972dc8c8089eae534f3">CNeural_activation</a>(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum], nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>[nodeNum].<a class="code hl_variable" href="struct_node.html#a83bdbbc32b2b3bdc15cf254b51ad8ae9">AF</a>);</div>
-<div class="line"><span class="lineno">  192</span>                    <span class="comment">// printf(&quot;\n&quot;);</span></div>
-<div class="line"><span class="lineno">  193</span>                }</div>
-<div class="line"><span class="lineno">  194</span> </div>
-<div class="line"><span class="lineno">  195</span>                <span class="comment">// printf(&quot;\n&quot;);</span></div>
-<div class="line"><span class="lineno">  196</span>            }</div>
-<div class="line"><span class="lineno">  197</span> </div>
-<div class="line"><span class="lineno">  198</span>            nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adf2d37723fb9f4294f882a2d6c045b2b">loss</a> += <a class="code hl_function" href="#ad9af994b51c3eb2ed0df0e2040e3eb1c">CNeural_loss</a>(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a3abc7b8de02ee8b93ba8f20615375077">nLayers</a> - 1].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>, labels[label], nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a3d7e7ab8cfa05cf27aed0f1e1132d997">outShape</a>, nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adc6333dd0a804545cd73763d1efb8d4b">lf</a>);</div>
-<div class="line"><span class="lineno">  199</span> </div>
-<div class="line"><span class="lineno">  200</span>            <span class="comment">// TODO implement optimizer flexibility (currently only gradient des.)</span></div>
-<div class="line"><span class="lineno">  201</span>            <a class="code hl_function" href="_c_neural_8h.html#ac141cf1b82f6177272c46240d6eadae9">CNeural_derivatives</a>(nn, inputs[label], labels[label], <span class="stringliteral">&quot;mse&quot;</span>);</div>
-<div class="line"><span class="lineno">  202</span>            <span class="comment">// printf(&quot;\n&quot;);</span></div>
-<div class="line"><span class="lineno">  203</span> </div>
-<div class="line"><span class="lineno">  204</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> layerNum = 0; layerNum &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a3abc7b8de02ee8b93ba8f20615375077">nLayers</a>; layerNum++) { <span class="comment">// clear after each label</span></div>
-<div class="line"><span class="lineno">  205</span>                <a class="code hl_function" href="#a022976e5525b33c51cb7a19c5242569b">CNeural_clear_nodeResults</a>(nn, layerNum);</div>
-<div class="line"><span class="lineno">  206</span>            }</div>
-<div class="line"><span class="lineno">  207</span>        }</div>
-<div class="line"><span class="lineno">  208</span>        nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adf2d37723fb9f4294f882a2d6c045b2b">loss</a> = nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adf2d37723fb9f4294f882a2d6c045b2b">loss</a> / (float) nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a833845a223339102f69bf5155d464c83">nLabels</a>;</div>
-<div class="line"><span class="lineno">  209</span>        printf(<span class="stringliteral">&quot;Loss: %f\n&quot;</span>, nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adf2d37723fb9f4294f882a2d6c045b2b">loss</a>);</div>
-<div class="line"><span class="lineno">  210</span>        printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  211</span> </div>
-<div class="line"><span class="lineno">  212</span>        <span class="keywordflow">if</span> (nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adf2d37723fb9f4294f882a2d6c045b2b">loss</a> &lt; 20) { <span class="comment">// early stopping</span></div>
-<div class="line"><span class="lineno">  213</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  214</span>        }</div>
-<div class="line"><span class="lineno">  215</span>        <a class="code hl_function" href="_c_neural_8h.html#af6f2e16cd790a9d50acf01db129ce1bb">CNeural_update_weights</a>(nn);</div>
-<div class="line"><span class="lineno">  216</span> </div>
+<div class="fragment"><div class="line"><span class="lineno">  149</span>                                                                                                                                                                                                                              {</div>
+<div class="line"><span class="lineno">  150</span>    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a833845a223339102f69bf5155d464c83">nLabels</a> = numLabels;</div>
+<div class="line"><span class="lineno">  151</span>    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adc6333dd0a804545cd73763d1efb8d4b">lf</a> = lossFunction;</div>
+<div class="line"><span class="lineno">  152</span>    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a2d62ba85ba6e1ecc078bb70d8ec593dd">opt</a> = optimizer;</div>
+<div class="line"><span class="lineno">  153</span>    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#af49e81211e1db4227a76fe6892392dd1">lr</a> = learningRate;</div>
+<div class="line"><span class="lineno">  154</span>    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a06368f0a1841271faa902c40acb691cf">epochs</a> = epochs;</div>
+<div class="line"><span class="lineno">  155</span> </div>
+<div class="line"><span class="lineno">  156</span>    <span class="comment">// TODO loss and expand activation functions</span></div>
+<div class="line"><span class="lineno">  157</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> epoch = 1; epoch &lt;= nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a06368f0a1841271faa902c40acb691cf">epochs</a>; epoch++) {</div>
+<div class="line"><span class="lineno">  158</span>        printf(<span class="stringliteral">&quot;Epoch %d/%d\n&quot;</span>, epoch, nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a06368f0a1841271faa902c40acb691cf">epochs</a>);</div>
+<div class="line"><span class="lineno">  159</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> label = 0; label &lt; numLabels; label++) {</div>
+<div class="line"><span class="lineno">  160</span>            <span class="comment">// printf(&quot;Label: %d\n&quot;, label + 1);</span></div>
+<div class="line"><span class="lineno">  161</span> </div>
+<div class="line"><span class="lineno">  162</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> layerNum = 0; layerNum &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a3abc7b8de02ee8b93ba8f20615375077">nLayers</a>; layerNum++) {</div>
+<div class="line"><span class="lineno">  163</span>                <span class="comment">// printf(&quot;Layer %d\n&quot;, layerNum + 1);</span></div>
+<div class="line"><span class="lineno">  164</span> </div>
+<div class="line"><span class="lineno">  165</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nodeNum = 0; nodeNum &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#ab5242add5962116d4d46270da25895b3">nNodes</a>; nodeNum++) {</div>
+<div class="line"><span class="lineno">  166</span>                    <span class="comment">// printf(&quot;\tNode %d\n&quot;, nodeNum + 1);</span></div>
+<div class="line"><span class="lineno">  167</span>                    <span class="keywordflow">if</span> (layerNum == 0) { <span class="comment">// 1st layer # of weights should = # of inputs</span></div>
+<div class="line"><span class="lineno">  168</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> weightNum = 0; weightNum &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a32c26fecb5cf2bd18c91622be1096dd1">inShape</a>; weightNum++) {</div>
+<div class="line"><span class="lineno">  169</span>                            <span class="comment">// printf(&quot;\t\tWeight %d: %f &quot;, weightNum + 1, nn-&gt;layers[0].nodes[nodeNum].weights[weightNum]);</span></div>
+<div class="line"><span class="lineno">  170</span>                            <span class="comment">// printf(&quot;\t\tWeightder %d: %f &quot;, weightNum + 1, nn-&gt;layers[0].nodes[nodeNum].weightDerivatives[weightNum]);</span></div>
+<div class="line"><span class="lineno">  171</span>                            nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum] +=</div>
+<div class="line"><span class="lineno">  172</span>                                nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>[nodeNum].<a class="code hl_variable" href="struct_node.html#a210dc23584593727ddf26671264aa16a">weights</a>[weightNum] * inputs[label][weightNum]; <span class="comment">// adds for each linear combination (weighted sum)</span></div>
+<div class="line"><span class="lineno">  173</span> </div>
+<div class="line"><span class="lineno">  174</span>                            <span class="comment">// printf(&quot;Noderes value: %f\n&quot;, nn-&gt;layers[0].nodesResults[nodeNum]);</span></div>
+<div class="line"><span class="lineno">  175</span>                        }</div>
+<div class="line"><span class="lineno">  176</span>                    } <span class="keywordflow">else</span> {  <span class="comment">// # of weights should = previous layer # of nodes</span></div>
+<div class="line"><span class="lineno">  177</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> weightNum = 0; weightNum &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum - 1].<a class="code hl_variable" href="struct_layer.html#ab5242add5962116d4d46270da25895b3">nNodes</a>; weightNum++) {</div>
+<div class="line"><span class="lineno">  178</span>                            <span class="comment">// printf(&quot;\t\tWeight %d: %f \t&quot;, weightNum + 1, nn-&gt;layers[layerNum].nodes[nodeNum].weights[weightNum]);</span></div>
+<div class="line"><span class="lineno">  179</span>                            nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum] +=</div>
+<div class="line"><span class="lineno">  180</span>                                nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>[nodeNum].<a class="code hl_variable" href="struct_node.html#a210dc23584593727ddf26671264aa16a">weights</a>[weightNum] * nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum - 1].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[weightNum]; <span class="comment">// adds for each linear combination (weighted sum)</span></div>
+<div class="line"><span class="lineno">  181</span>                            <span class="comment">// printf(&quot;Noderes value: %f\n&quot;, nn-&gt;layers[layerNum].nodesResults[nodeNum]);</span></div>
+<div class="line"><span class="lineno">  182</span>                        }</div>
+<div class="line"><span class="lineno">  183</span>                    }</div>
+<div class="line"><span class="lineno">  184</span>                    <span class="comment">// printf(&quot;\t\tBiasder: %f &quot;, nn-&gt;layers[0].nodes[nodeNum].biasDerivative);</span></div>
+<div class="line"><span class="lineno">  185</span>                    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum] += nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>[nodeNum].<a class="code hl_variable" href="struct_node.html#ab881305da614121cd59b58172248c151">bias</a>;</div>
+<div class="line"><span class="lineno">  186</span>                    <span class="comment">// printf(&quot;\n&quot;);</span></div>
+<div class="line"><span class="lineno">  187</span>                    <span class="comment">// printf(&quot;\t\tAfter bias: %f\n&quot;, nn-&gt;layers[layerNum].nodesResults[nodeNum]);</span></div>
+<div class="line"><span class="lineno">  188</span> </div>
+<div class="line"><span class="lineno">  189</span>                    <span class="comment">// printf(&quot;\t\tAfter activation: %f\n&quot;, CNeural_activation(nn-&gt;layers[layerNum].nodesResults[nodeNum], nn-&gt;layers[layerNum].nodes[nodeNum].AF));</span></div>
+<div class="line"><span class="lineno">  190</span>                    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#af295f7e716b58e4c39174754f1a1293a">weightedSum</a>[nodeNum] = nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum];</div>
+<div class="line"><span class="lineno">  191</span>                    nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum] =</div>
+<div class="line"><span class="lineno">  192</span>                        <a class="code hl_function" href="#a991bd7f50a4a9972dc8c8089eae534f3">CNeural_activation</a>(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>[nodeNum], nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[layerNum].<a class="code hl_variable" href="struct_layer.html#a07852b120b06d9f9e9609d7db5fb07ae">nodes</a>[nodeNum].<a class="code hl_variable" href="struct_node.html#a83bdbbc32b2b3bdc15cf254b51ad8ae9">AF</a>);</div>
+<div class="line"><span class="lineno">  193</span>                    <span class="comment">// printf(&quot;\n&quot;);</span></div>
+<div class="line"><span class="lineno">  194</span>                }</div>
+<div class="line"><span class="lineno">  195</span> </div>
+<div class="line"><span class="lineno">  196</span>                <span class="comment">// printf(&quot;\n&quot;);</span></div>
+<div class="line"><span class="lineno">  197</span>            }</div>
+<div class="line"><span class="lineno">  198</span> </div>
+<div class="line"><span class="lineno">  199</span>            nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adf2d37723fb9f4294f882a2d6c045b2b">loss</a> += <a class="code hl_function" href="#ad9af994b51c3eb2ed0df0e2040e3eb1c">CNeural_loss</a>(nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a0bcbd82e1a0ae0b9ccf9436a7d256374">layers</a>[nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a3abc7b8de02ee8b93ba8f20615375077">nLayers</a> - 1].<a class="code hl_variable" href="struct_layer.html#aac5a8bf17b6640be4bc4eac3b30be11e">nodesResults</a>, labels[label], nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a3d7e7ab8cfa05cf27aed0f1e1132d997">outShape</a>, nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adc6333dd0a804545cd73763d1efb8d4b">lf</a>);</div>
+<div class="line"><span class="lineno">  200</span> </div>
+<div class="line"><span class="lineno">  201</span>            <span class="comment">// TODO implement optimizer flexibility (currently only gradient des.)</span></div>
+<div class="line"><span class="lineno">  202</span>            <a class="code hl_function" href="_c_neural_8h.html#ac141cf1b82f6177272c46240d6eadae9">CNeural_derivatives</a>(nn, inputs[label], labels[label], <span class="stringliteral">&quot;mse&quot;</span>);</div>
+<div class="line"><span class="lineno">  203</span>            <span class="comment">// printf(&quot;\n&quot;);</span></div>
+<div class="line"><span class="lineno">  204</span> </div>
+<div class="line"><span class="lineno">  205</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> layerNum = 0; layerNum &lt; nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a3abc7b8de02ee8b93ba8f20615375077">nLayers</a>; layerNum++) { <span class="comment">// clear after each label</span></div>
+<div class="line"><span class="lineno">  206</span>                <a class="code hl_function" href="#a022976e5525b33c51cb7a19c5242569b">CNeural_clear_nodeResults</a>(nn, layerNum);</div>
+<div class="line"><span class="lineno">  207</span>            }</div>
+<div class="line"><span class="lineno">  208</span>        }</div>
+<div class="line"><span class="lineno">  209</span>        nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adf2d37723fb9f4294f882a2d6c045b2b">loss</a> = nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adf2d37723fb9f4294f882a2d6c045b2b">loss</a> / (float) nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#a833845a223339102f69bf5155d464c83">nLabels</a>;</div>
+<div class="line"><span class="lineno">  210</span>        printf(<span class="stringliteral">&quot;Loss: %f\n&quot;</span>, nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adf2d37723fb9f4294f882a2d6c045b2b">loss</a>);</div>
+<div class="line"><span class="lineno">  211</span>        printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  212</span> </div>
+<div class="line"><span class="lineno">  213</span>        <span class="keywordflow">if</span> (nn-&gt;<a class="code hl_variable" href="struct_neural_network.html#adf2d37723fb9f4294f882a2d6c045b2b">loss</a> &lt; earlyStopLoss) { <span class="comment">// early stopping</span></div>
+<div class="line"><span class="lineno">  214</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  215</span>        }</div>
+<div class="line"><span class="lineno">  216</span>        <a class="code hl_function" href="_c_neural_8h.html#af6f2e16cd790a9d50acf01db129ce1bb">CNeural_update_weights</a>(nn);</div>
 <div class="line"><span class="lineno">  217</span> </div>
-<div class="line"><span class="lineno">  218</span>    }</div>
-<div class="line"><span class="lineno">  219</span>}</div>
-<div class="ttc" id="a_c_neural_8c_html_a991bd7f50a4a9972dc8c8089eae534f3"><div class="ttname"><a href="#a991bd7f50a4a9972dc8c8089eae534f3">CNeural_activation</a></div><div class="ttdeci">float CNeural_activation(float input, string af)</div><div class="ttdef"><b>Definition</b> CNeural.c:228</div></div>
-<div class="ttc" id="a_c_neural_8c_html_ad9af994b51c3eb2ed0df0e2040e3eb1c"><div class="ttname"><a href="#ad9af994b51c3eb2ed0df0e2040e3eb1c">CNeural_loss</a></div><div class="ttdeci">float CNeural_loss(float predicted[], float actual[], int outputShape, string lfn)</div><div class="ttdef"><b>Definition</b> CNeural.c:254</div></div>
+<div class="line"><span class="lineno">  218</span> </div>
+<div class="line"><span class="lineno">  219</span>    }</div>
+<div class="line"><span class="lineno">  220</span>}</div>
+<div class="ttc" id="a_c_neural_8c_html_a991bd7f50a4a9972dc8c8089eae534f3"><div class="ttname"><a href="#a991bd7f50a4a9972dc8c8089eae534f3">CNeural_activation</a></div><div class="ttdeci">float CNeural_activation(float input, string af)</div><div class="ttdef"><b>Definition</b> CNeural.c:229</div></div>
+<div class="ttc" id="a_c_neural_8c_html_ad9af994b51c3eb2ed0df0e2040e3eb1c"><div class="ttname"><a href="#ad9af994b51c3eb2ed0df0e2040e3eb1c">CNeural_loss</a></div><div class="ttdeci">float CNeural_loss(float predicted[], float actual[], int outputShape, string lfn)</div><div class="ttdef"><b>Definition</b> CNeural.c:255</div></div>
 <div class="ttc" id="a_c_neural_8h_html_ac141cf1b82f6177272c46240d6eadae9"><div class="ttname"><a href="_c_neural_8h.html#ac141cf1b82f6177272c46240d6eadae9">CNeural_derivatives</a></div><div class="ttdeci">void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], string lossFunction)</div><div class="ttdef"><b>Definition</b> CNeural_backpropagation.c:22</div></div>
-<div class="ttc" id="a_c_neural_8h_html_af6f2e16cd790a9d50acf01db129ce1bb"><div class="ttname"><a href="_c_neural_8h.html#af6f2e16cd790a9d50acf01db129ce1bb">CNeural_update_weights</a></div><div class="ttdeci">void CNeural_update_weights(NeuralNetwork *nn)</div><div class="ttdef"><b>Definition</b> CNeural_backpropagation.c:59</div></div>
+<div class="ttc" id="a_c_neural_8h_html_af6f2e16cd790a9d50acf01db129ce1bb"><div class="ttname"><a href="_c_neural_8h.html#af6f2e16cd790a9d50acf01db129ce1bb">CNeural_update_weights</a></div><div class="ttdeci">void CNeural_update_weights(NeuralNetwork *nn)</div><div class="ttdef"><b>Definition</b> CNeural_backpropagation.c:58</div></div>
 <div class="ttc" id="astruct_neural_network_html_a06368f0a1841271faa902c40acb691cf"><div class="ttname"><a href="struct_neural_network.html#a06368f0a1841271faa902c40acb691cf">NeuralNetwork::epochs</a></div><div class="ttdeci">int epochs</div><div class="ttdef"><b>Definition</b> CNeural.h:53</div></div>
 <div class="ttc" id="astruct_neural_network_html_a2d62ba85ba6e1ecc078bb70d8ec593dd"><div class="ttname"><a href="struct_neural_network.html#a2d62ba85ba6e1ecc078bb70d8ec593dd">NeuralNetwork::opt</a></div><div class="ttdeci">string opt</div><div class="ttdef"><b>Definition</b> CNeural.h:51</div></div>
 <div class="ttc" id="astruct_neural_network_html_a833845a223339102f69bf5155d464c83"><div class="ttname"><a href="struct_neural_network.html#a833845a223339102f69bf5155d464c83">NeuralNetwork::nLabels</a></div><div class="ttdeci">int nLabels</div><div class="ttdef"><b>Definition</b> CNeural.h:48</div></div>

@@ -3,7 +3,7 @@
  * \brief Source file for CNeural, containing function definitions.
  *
  * \author Dai Duong Le
- * \version: 0.1.0
+ * \version: 0.1.1
 */
 
 #include <stdio.h>
@@ -144,8 +144,9 @@ void CNeural_clear_nodeResults(NeuralNetwork *nn, int layerNum) {
  * @param optimizer a string corresponding to an optimizer
  * @param learningRate learning rate to be applied in gradient descent
  * @param epochs number of epochs (forward passes through the whole dataset)
+ * @param earlyStopLoss stop at or below specified loss value
 */
-void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn->inShape], float labels[numLabels][nn->outShape], string lossFunction, string optimizer, float learningRate, int epochs) {
+void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn->inShape], float labels[numLabels][nn->outShape], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss) {
     nn->nLabels = numLabels;
     nn->lf = lossFunction;
     nn->opt = optimizer;
@@ -209,7 +210,7 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
         printf("Loss: %f\n", nn->loss);
         printf("\n");
 
-        if (nn->loss < 20) { // early stopping
+        if (nn->loss < earlyStopLoss) { // early stopping
             return;
         }
         CNeural_update_weights(nn);

@@ -1,9 +1,9 @@
 /**
  * \file main.c
- * \brief Example use of CNeural.
+ * \brief Example use of CNeural, finding Celsius to Fahrenheit function.
  *
  * \author Dai Duong Le
- * \version: 0.1.0
+ * \version: 0.1.1
 */
 #include <stdio.h>
 #include <time.h>
@@ -60,14 +60,14 @@ int main() {
     printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
     printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
 
-    CNeural_train(&ctof, numLabels, features, labels, "mse", "sgd", (float) 0.000005, 1000); // optimizer not implemented yet
+    CNeural_train(&ctof, numLabels, features, labels, "mse", "sgd", (float) 0.000005, 1000, 10); // optimizer not implemented yet
     printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
     printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
     CNeural_free(&ctof);
 
     clock_t stop = clock();
     double elapsed = (double) (stop - start) / CLOCKS_PER_SEC;
-    printf("\nTime elapsed: %.5f\n", elapsed);
+    printf("\nTime elapsed: %.5fs\n", elapsed);
 
     return 0;
 }

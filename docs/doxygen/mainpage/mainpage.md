@@ -1,4 +1,4 @@
-\mainpage
+\mainpage Main Page
 
 CNeural is a simple implementation of a deep neural network in C.
 

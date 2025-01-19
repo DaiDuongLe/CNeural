@@ -3,7 +3,7 @@
  * \brief Header file for CNeural, containing data structures and function declarations.
  *
  * \author Dai Duong Le
- * \version: 0.1.0
+ * \version: 0.1.1
 */
 
 #ifndef CNEURAL_H
@@ -59,7 +59,7 @@ typedef struct {
 int CNeural_init(NeuralNetwork *nn, int inputShape, int outputShape, int numLayers, int layerNumNodes[], string layersAF[], string initMethod);
 void CNeural_clear_nodeResults(NeuralNetwork *nn, int layerNum);
 int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option);
-void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn->inShape], float labels[numLabels][nn->outShape], string lossFunction, string optimizer, float learningRate, int epochs);
+void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn->inShape], float labels[numLabels][nn->outShape], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss);
 float CNeural_activation(float input, string af);
 float CNeural_loss(float predicted[], float actual[], int outputShape, string lfn);
 void CNeural_free(NeuralNetwork *nn);
