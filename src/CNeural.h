@@ -36,7 +36,7 @@ typedef struct {
     string layerAF; /**< corresponding activations apply to the whole layer, adjust accordingly by changing individual node activations */
     float *weightedSum; /**< weighted sums array of linear combinations before passing through the activation function */
     float *nodesResults; /**< Layer output, weighted sums array that have passed through the activation function as input to the next layer. */
-    float *nodesResultDerivatives;
+    float *nodesResultsDerivatives;
 } Layer;
 
 /** \struct NeuralNetwork
