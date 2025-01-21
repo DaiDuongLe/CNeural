@@ -3,7 +3,7 @@
  * \brief Source file for CNeural backpropagation, containing function definitions.
  *
  * \author Dai Duong Le
- * \version: 0.1.1
+ * \version: 0.1.2
 */
 
 #include "CNeural.h"
@@ -39,10 +39,10 @@ void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], stri
                 } else {
                     float nodeResultDerivativeSum = 0; // partial derivative of the cost with respect to an element in the current layer nodesResults (NodeResultDerivative)
                     for (int i = 0; i < nn->layers[layerNum + 1].nNodes; i++) {
-                        float previousWeightNodeResultDerivative = nn->layers[layerNum + 1].nodes[i].weights[nodeNum] * nn->layers[layerNum + 1].nodesResultDerivatives[i]; // current weight is nodes[i].weights[nodeNum]
+                        float previousWeightNodeResultDerivative = nn->layers[layerNum + 1].nodes[i].weights[nodeNum] * nn->layers[layerNum + 1].nodesResultsDerivatives[i]; // current weight is nodes[i].weights[nodeNum]
                         nodeResultDerivativeSum += previousWeightNodeResultDerivative;
                     }
-                    nn->layers[layerNum].nodesResultDerivatives[nodeNum] = nodeResultDerivativeSum;
+                    nn->layers[layerNum].nodesResultsDerivatives[nodeNum] = nodeResultDerivativeSum;
 
                     for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
                         float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum];
@@ -58,26 +58,26 @@ void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], stri
                     nn->layers[layerNum].nodes[nodeNum].biasDerivative = previousDerivative + currentDerivative;
                 }
             } else if (layerNum == nn->nLayers - 1) { // first layer in backprop (last layer)
-                nn->layers[layerNum].nodesResultDerivatives[nodeNum] = CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * CNeural_loss_derivative(nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction);
+                nn->layers[layerNum].nodesResultsDerivatives[nodeNum] = CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * CNeural_loss_derivative(nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction);
                 for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
                     float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum];
                     // printf("WeightderBEFORE: %f\n", previousDerivative);
-                    float currentDerivative = (float) 1.0/(float) nn->nLabels * nn->layers[layerNum - 1].nodesResults[weightNum] * nn->layers[layerNum].nodesResultDerivatives[nodeNum];
+                    float currentDerivative = (float) 1.0/(float) nn->nLabels * nn->layers[layerNum - 1].nodesResults[weightNum] * nn->layers[layerNum].nodesResultsDerivatives[nodeNum];
                     // printf("WeightderCURRENT: %f\n", currentDerivative);
                     nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum] = previousDerivative + currentDerivative;
                 }
                 float previousDerivative = nn->layers[layerNum].nodes[nodeNum].biasDerivative;
                 // printf("BiasderPREVIOUS: %f\n", previousDerivative);
-                float currentDerivative = (float) 1.0/(float) nn->nLabels * nn->layers[layerNum].nodesResultDerivatives[nodeNum];
+                float currentDerivative = (float) 1.0/(float) nn->nLabels * nn->layers[layerNum].nodesResultsDerivatives[nodeNum];
                 // printf("BiasderCURRENT: %f\n", currentDerivative);
                 nn->layers[layerNum].nodes[nodeNum].biasDerivative = previousDerivative + currentDerivative;
             } else { // hidden layers except for first (last in backprop)
                 float nodeResultDerivativeSum = 0; // partial derivative of the cost with respect to an element in the current layer nodesResults (NodeResultDerivative)
                 for (int i = 0; i < nn->layers[layerNum + 1].nNodes; i++) {
-                    float previousWeightNodeResultDerivative = nn->layers[layerNum + 1].nodes[i].weights[nodeNum] * nn->layers[layerNum + 1].nodesResultDerivatives[i]; // current weight is nodes[i].weights[nodeNum]
+                    float previousWeightNodeResultDerivative = nn->layers[layerNum + 1].nodes[i].weights[nodeNum] * nn->layers[layerNum + 1].nodesResultsDerivatives[i]; // current weight is nodes[i].weights[nodeNum]
                     nodeResultDerivativeSum += previousWeightNodeResultDerivative;
                 }
-                nn->layers[layerNum].nodesResultDerivatives[nodeNum] = nodeResultDerivativeSum;
+                nn->layers[layerNum].nodesResultsDerivatives[nodeNum] = nodeResultDerivativeSum;
 
                 for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
                     float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum];

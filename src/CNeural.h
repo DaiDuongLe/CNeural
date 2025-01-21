@@ -3,7 +3,7 @@
  * \brief Header file for CNeural, containing data structures and function declarations.
  *
  * \author Dai Duong Le
- * \version: 0.1.1
+ * \version: 0.1.2
 */
 
 #ifndef CNEURAL_H
@@ -36,7 +36,7 @@ typedef struct {
     string layerAF; /**< corresponding activations apply to the whole layer, adjust accordingly by changing individual node activations */
     float *weightedSum; /**< weighted sums array of linear combinations before passing through the activation function */
     float *nodesResults; /**< Layer output, weighted sums array that have passed through the activation function as input to the next layer. */
-    float *nodesResultDerivatives;
+    float *nodesResultsDerivatives;
 } Layer;
 
 /** \struct NeuralNetwork

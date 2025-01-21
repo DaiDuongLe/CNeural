@@ -3,7 +3,7 @@
  * \brief Source file for CNeural, containing function definitions.
  *
  * \author Dai Duong Le
- * \version: 0.1.1
+ * \version: 0.1.2
 */
 
 #include <stdio.h>
@@ -56,7 +56,7 @@ int CNeural_init(NeuralNetwork *nn, int inputShape, int outputShape, int numLaye
         nn->layers[i].nodes = malloc(sizeof(Node) * (unsigned int) nn->layers[i].nNodes);
         nn->layers[i].weightedSum = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes);
         nn->layers[i].nodesResults = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes);
-        nn->layers[i].nodesResultDerivatives = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes);
+        nn->layers[i].nodesResultsDerivatives = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes);
         CNeural_clear_nodeResults(nn, i); // init with 0 to clear garbage values
 
         if (nn->layers[i].nodes == NULL || nn->layers[i].weightedSum == NULL || nn->layers[i].nodesResults == NULL) {
@@ -127,7 +127,7 @@ void CNeural_clear_nodeResults(NeuralNetwork *nn, int layerNum) { // TODO Rename
     for (int i = 0; i < nn->layers[layerNum].nNodes; i++) {
         nn->layers[layerNum].weightedSum[i] = 0; // and weightedSum
         nn->layers[layerNum].nodesResults[i] = 0;
-        nn->layers[layerNum].nodesResultDerivatives[i] = 0;
+        nn->layers[layerNum].nodesResultsDerivatives[i] = 0;
     }
 }
 
@@ -293,6 +293,7 @@ void CNeural_free(NeuralNetwork *nn) {
         free(nn->layers[i].nodes);
         free(nn->layers[i].weightedSum);
         free(nn->layers[i].nodesResults);
+        free(nn->layers[i].nodesResultsDerivatives);
     }
     free(nn->layers);
 }
