@@ -56,6 +56,7 @@ int CNeural_init(NeuralNetwork *nn, int inputShape, int outputShape, int numLaye
         nn->layers[i].nodes = malloc(sizeof(Node) * (unsigned int) nn->layers[i].nNodes);
         nn->layers[i].weightedSum = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes);
         nn->layers[i].nodesResults = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes);
+        nn->layers[i].nodesResultDerivatives = malloc(sizeof(float) * (unsigned int) nn->layers[i].nNodes);
         CNeural_clear_nodeResults(nn, i); // init with 0 to clear garbage values
 
         if (nn->layers[i].nodes == NULL || nn->layers[i].weightedSum == NULL || nn->layers[i].nodesResults == NULL) {
@@ -122,10 +123,11 @@ int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
  * @param nn neural network type
  * @param layerNum layer number
 */
-void CNeural_clear_nodeResults(NeuralNetwork *nn, int layerNum) {
+void CNeural_clear_nodeResults(NeuralNetwork *nn, int layerNum) { // TODO Rename to clear_layerParams or similar
     for (int i = 0; i < nn->layers[layerNum].nNodes; i++) {
         nn->layers[layerNum].weightedSum[i] = 0; // and weightedSum
         nn->layers[layerNum].nodesResults[i] = 0;
+        nn->layers[layerNum].nodesResultDerivatives[i] = 0;
     }
 }
 

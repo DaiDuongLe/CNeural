@@ -17,9 +17,9 @@ int main() {
     int inputShape = 1;
     int outputShape = 1;
     int numLabels = 10; // same as features
-    int numLayers = 1; // MUST be the same # of elements as in eachLayer[]
-    int eachLayer[] = {1}; // should include output layer as well, the same as outputShape
-    string afs[] = {"none"}; // will not return 0 (error) when # of elements is < than # of layers, only checks for unknown af (strings)
+    int numLayers = 3; // MUST be the same # of elements as in eachLayer[]
+    int eachLayer[] = {2, 2, 1}; // should include output layer as well, the same as outputShape
+    string afs[] = {"none", "none", "none"}; // will not return 0 (error) when # of elements is < than # of layers, only checks for unknown af (strings)
 
     if (CNeural_init(&ctof, inputShape, outputShape, numLayers, eachLayer, afs, "random") != 0) {
         printf("Error: Initialization failed.");
@@ -57,12 +57,12 @@ int main() {
         {176}
     };
 
-    printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
-    printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
+    // printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
+    // printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
 
-    CNeural_train(&ctof, numLabels, features, labels, "mse", "sgd", (float) 0.000005, 1000, 10); // optimizer not implemented yet
-    printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
-    printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
+    CNeural_train(&ctof, numLabels, features, labels, "mse", "sgd", (float) 0.000005, 1000, 20); // optimizer not implemented yet
+    // printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
+    // printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
     CNeural_free(&ctof);
 
     clock_t stop = clock();
