@@ -221,6 +221,28 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
     }
 }
 
+void CNeural_predict(NeuralNetwork *nn, float input[]) {
+    for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
+        for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
+            if (layerNum == 0) { // 1st layer # of weights should = # of inputs
+                for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
+                    nn->layers[layerNum].nodesResults[nodeNum] +=
+                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * input[weightNum];
+                }
+            } else {  // # of weights should = previous layer # of nodes
+                for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
+                    nn->layers[layerNum].nodesResults[nodeNum] +=
+                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; // adds for each linear combination (weighted sum)
+                }
+            }
+            nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
+        }
+    }
+    for (int i = 0; i < nn->outShape; i++) {
+        printf("predicted: %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
+    }
+}
+
 /**
  * Activation function. Helper function to CNeural_train.
  * 
