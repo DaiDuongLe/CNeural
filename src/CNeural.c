@@ -148,7 +148,7 @@ void CNeural_clear_nodeResults(NeuralNetwork *nn, int layerNum) { // TODO Rename
  * @param epochs number of epochs (forward passes through the whole dataset)
  * @param earlyStopLoss stop at or below specified loss value
 */
-void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn->inShape], float labels[numLabels][nn->outShape], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss) {
+void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn->inShape], float labels[numLabels][nn->outShape], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss, FILE* lossFile) {
     nn->nLabels = numLabels;
     nn->lf = lossFunction;
     nn->opt = optimizer;
@@ -209,6 +209,13 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
             }
         }
         nn->loss = nn->loss / (float) nn->nLabels;
+        if (lossFile != NULL) {
+            if (epoch == 1) {
+                fprintf(lossFile, "epoch,loss\n");
+            }
+            fprintf(lossFile, "%d,%.6f\n", epoch, nn->loss);
+            fflush(lossFile);
+        }
         printf("Loss: %f\n", nn->loss);
         printf("\n");
 
@@ -221,7 +228,7 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
     }
 }
 
-void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* labels[], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss) {
+void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* labels[], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss, FILE* lossFile) {
     nn->nLabels = numLabels;
     nn->lf = lossFunction;
     nn->opt = optimizer;
@@ -283,6 +290,13 @@ void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* l
             }
         }
         nn->loss = nn->loss / (float) nn->nLabels;
+        if (lossFile != NULL) {
+            if (epoch == 1) {
+                fprintf(lossFile, "epoch,loss\n");
+            }
+            fprintf(lossFile, "%d,%.6f\n", epoch, nn->loss);
+            fflush(lossFile);
+        }
         printf("Loss: %f\n", nn->loss);
         printf("\n");
 

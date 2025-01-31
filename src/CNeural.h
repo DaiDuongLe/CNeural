@@ -5,6 +5,9 @@
  * \author Dai Duong Le
  * \version: 0.1.2
 */
+#pragma once
+
+#include <stdio.h>
 
 #ifndef CNEURAL_H
 #define CNEURAL_H
@@ -60,8 +63,8 @@ typedef struct {
 int CNeural_init(NeuralNetwork *nn, int inputShape, int outputShape, int numLayers, int layerNumNodes[], string layersAF[], string initMethod);
 void CNeural_clear_nodeResults(NeuralNetwork *nn, int layerNum);
 int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option);
-void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn->inShape], float labels[numLabels][nn->outShape], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss);
-void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* labels[], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss);
+void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn->inShape], float labels[numLabels][nn->outShape], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss, FILE* lossFile);
+void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* labels[], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss, FILE* lossFile);
 void CNeural_predict(NeuralNetwork *nn, float input[]);
 void CNeural_predict_ptr(NeuralNetwork *nn, char* input);
 float CNeural_activation(float input, string af);

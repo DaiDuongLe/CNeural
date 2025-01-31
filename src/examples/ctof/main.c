@@ -60,7 +60,7 @@ int main() {
     // printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
     // printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
 
-    CNeural_train(&ctof, numLabels, features, labels, "mse", "sgd", (float) 0.0000005, 5000, 20); // optimizer not implemented yet
+    CNeural_train(&ctof, numLabels, features, labels, "mse", "sgd", (float) 0.0000005, 5000, 20, NULL); // optimizer not implemented yet
     // printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
     // printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
     CNeural_predict(&ctof, features[0]);

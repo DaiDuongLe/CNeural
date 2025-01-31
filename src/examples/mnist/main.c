@@ -98,7 +98,12 @@ int main() {
       printf("Error: Initialization failed.");
       return 1;
     }
-    CNeural_train_ptr(&mnist, numLabels, trainArr, labelArr, "mse", "sgd", (float) 0.5, 50, 1); // optimizer not implemented yet
+
+    FILE* lossFile = fopen("loss.csv", "a");
+    if (lossFile == NULL) {
+        printf("Error opening loss file\n");
+    }
+    CNeural_train_ptr(&mnist, numLabels, trainArr, labelArr, "mse", "sgd", (float) 0.5, 100, 0.1, lossFile); // optimizer not implemented yet
 
     // display image
     int imageNumber = 420;
