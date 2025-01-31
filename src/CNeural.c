@@ -232,13 +232,13 @@ void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* l
     for (int epoch = 1; epoch <= nn->epochs; epoch++) {
         printf("Epoch %d/%d\n", epoch, nn->epochs);
         for (int label = 0; label < numLabels; label++) {
-            printf("Label: %d\n", label + 1);
+            // printf("Label: %d\n", label + 1);
 
             for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
                 // printf("Layer %d\n", layerNum + 1);
 
                 for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
-                    printf("\tNode %d\n", nodeNum + 1);
+                    // printf("\tNode %d\n", nodeNum + 1);
                     if (layerNum == 0) { // 1st layer # of weights should = # of inputs
                         for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
                             // printf("\t\tWeight %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weights[weightNum]);
@@ -265,7 +265,7 @@ void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* l
                     nn->layers[layerNum].weightedSum[nodeNum] = nn->layers[layerNum].nodesResults[nodeNum];
                     nn->layers[layerNum].nodesResults[nodeNum] =
                         CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF);
-                    printf("\t\tAfter activation: %f\n", nn->layers[layerNum].nodesResults[nodeNum]);
+                    // printf("\t\tAfter activation: %f\n", nn->layers[layerNum].nodesResults[nodeNum]);
                     // printf("\n");
                 }
 
@@ -310,6 +310,7 @@ void CNeural_predict(NeuralNetwork *nn, float input[]) {
                 }
             }
             nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
+            nn->layers[layerNum].nodesResults[nodeNum] = CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF);
         }
     }
     for (int i = 0; i < nn->outShape; i++) {
@@ -332,6 +333,7 @@ void CNeural_predict_ptr(NeuralNetwork *nn, char* input) {
                 }
             }
             nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
+            nn->layers[layerNum].nodesResults[nodeNum] = CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF);
         }
     }
     for (int i = 0; i < nn->outShape; i++) {
