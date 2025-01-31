@@ -221,7 +221,102 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
     }
 }
 
+void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* labels[], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss) {
+    nn->nLabels = numLabels;
+    nn->lf = lossFunction;
+    nn->opt = optimizer;
+    nn->lr = learningRate;
+    nn->epochs = epochs;
+
+    // TODO loss and expand activation functions
+    for (int epoch = 1; epoch <= nn->epochs; epoch++) {
+        printf("Epoch %d/%d\n", epoch, nn->epochs);
+        for (int label = 0; label < numLabels; label++) {
+            // printf("Label: %d\n", label + 1);
+
+            for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
+                // printf("Layer %d\n", layerNum + 1);
+
+                for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
+                    // printf("\tNode %d\n", nodeNum + 1);
+                    if (layerNum == 0) { // 1st layer # of weights should = # of inputs
+                        for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
+                            // printf("\t\tWeight %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weights[weightNum]);
+                            // printf("\t\tWeightder %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weightDerivatives[weightNum]);
+                            nn->layers[layerNum].nodesResults[nodeNum] +=
+                                nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * (float) inputs[label][weightNum]; // adds for each linear combination (weighted sum)
+
+                            // printf("Noderes value: %f\n", nn->layers[0].nodesResults[nodeNum]);
+                        }
+                    } else {  // # of weights should = previous layer # of nodes
+                        for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
+                            // printf("\t\tWeight %d: %f \t", weightNum + 1, nn->layers[layerNum].nodes[nodeNum].weights[weightNum]);
+                            nn->layers[layerNum].nodesResults[nodeNum] +=
+                                nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; // adds for each linear combination (weighted sum)
+                            // printf("Noderes value: %f\n", nn->layers[layerNum].nodesResults[nodeNum]);
+                        }
+                    }
+                    // printf("\t\tBiasder: %f ", nn->layers[0].nodes[nodeNum].biasDerivative);
+                    nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
+                    // printf("\n");
+                    // printf("\t\tAfter bias: %f\n", nn->layers[layerNum].nodesResults[nodeNum]);
+
+                    // printf("\t\tAfter activation: %f\n", CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF));
+                    nn->layers[layerNum].weightedSum[nodeNum] = nn->layers[layerNum].nodesResults[nodeNum];
+                    nn->layers[layerNum].nodesResults[nodeNum] =
+                        CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF);
+                    // printf("\n");
+                }
+
+                // printf("\n");
+            }
+
+            nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf);
+
+            // TODO implement optimizer flexibility (currently only gradient des.)
+            CNeural_derivatives(nn, inputs[label], labels[label], "mse");
+            // printf("\n");
+
+            for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) { // clear after each label
+                CNeural_clear_nodeResults(nn, layerNum);
+            }
+        }
+        nn->loss = nn->loss / (float) nn->nLabels;
+        printf("Loss: %f\n", nn->loss);
+        printf("\n");
+
+        if (nn->loss < earlyStopLoss) { // early stopping
+            return;
+        }
+        CNeural_update_weights(nn);
+
+
+    }
+}
+
 void CNeural_predict(NeuralNetwork *nn, float input[]) {
+    for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
+        for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
+            if (layerNum == 0) { // 1st layer # of weights should = # of inputs
+                for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
+                    nn->layers[layerNum].nodesResults[nodeNum] +=
+                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * input[weightNum];
+                }
+            } else {  // # of weights should = previous layer # of nodes
+                for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
+                    nn->layers[layerNum].nodesResults[nodeNum] +=
+                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; // adds for each linear combination (weighted sum)
+                }
+            }
+            nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
+        }
+    }
+    for (int i = 0; i < nn->outShape; i++) {
+        printf("predicted: %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
+    }
+}
+
+void CNeural_predict_ptr(NeuralNetwork *nn, char* input) {
     for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
         for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
             if (layerNum == 0) { // 1st layer # of weights should = # of inputs
@@ -308,10 +403,10 @@ float CNeural_loss(float predicted[], float actual[], int outputShape, string lf
 */
 void CNeural_free(NeuralNetwork *nn) {
     for (int i = 0; i < nn->nLayers; i++) {
-        for (int j = 0; j < nn->layers[i].nNodes; j++) {
-            free(nn->layers[i].nodes->weights);
-            free(nn->layers[i].nodes->weightDerivatives);
-        }
+        // for (int j = 0; j < nn->layers[i].nNodes; j++) {
+        //     free(nn->layers[i].nodes->weights);
+        //     free(nn->layers[i].nodes->weightDerivatives);
+        // }
         free(nn->layers[i].nodes);
         free(nn->layers[i].weightedSum);
         free(nn->layers[i].nodesResults);

@@ -61,6 +61,9 @@ int CNeural_init(NeuralNetwork *nn, int inputShape, int outputShape, int numLaye
 void CNeural_clear_nodeResults(NeuralNetwork *nn, int layerNum);
 int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option);
 void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn->inShape], float labels[numLabels][nn->outShape], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss);
+void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* labels[], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss);
+void CNeural_predict(NeuralNetwork *nn, float input[]);
+void CNeural_predict_ptr(NeuralNetwork *nn, char* input);
 float CNeural_activation(float input, string af);
 float CNeural_loss(float predicted[], float actual[], int outputShape, string lfn);
 void CNeural_free(NeuralNetwork *nn);
