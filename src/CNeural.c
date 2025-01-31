@@ -93,7 +93,7 @@ int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->inShape);
                 if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
                 for (int j = 0; j < nn->inShape; j++) { // for each WEIGHT in node
-                    nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / ((double) RAND_MAX + 1.0));
+                    nn->layers[layerNum].nodes[i].weights[j] = (float) (-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0));
                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;
                 }
             } else {  // # of weights should = previous layer # of nodes
@@ -101,7 +101,7 @@ int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->layers[layerNum - 1].nNodes);
                 if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
                 for (int j = 0; j < nn->layers[layerNum - 1].nNodes; j++) { // for each WEIGHT in node
-                    nn->layers[layerNum].nodes[i].weights[j] = (float) (rand() / ((double) RAND_MAX + 1.0));
+                    nn->layers[layerNum].nodes[i].weights[j] = (float) (-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0));
                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;
                 }
             }
@@ -232,21 +232,21 @@ void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* l
     for (int epoch = 1; epoch <= nn->epochs; epoch++) {
         printf("Epoch %d/%d\n", epoch, nn->epochs);
         for (int label = 0; label < numLabels; label++) {
-            // printf("Label: %d\n", label + 1);
+            printf("Label: %d\n", label + 1);
 
             for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
                 // printf("Layer %d\n", layerNum + 1);
 
                 for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
-                    // printf("\tNode %d\n", nodeNum + 1);
+                    printf("\tNode %d\n", nodeNum + 1);
                     if (layerNum == 0) { // 1st layer # of weights should = # of inputs
                         for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
                             // printf("\t\tWeight %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weights[weightNum]);
                             // printf("\t\tWeightder %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weightDerivatives[weightNum]);
                             nn->layers[layerNum].nodesResults[nodeNum] +=
                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * (float) inputs[label][weightNum]; // adds for each linear combination (weighted sum)
-
                             // printf("Noderes value: %f\n", nn->layers[0].nodesResults[nodeNum]);
+                            // printf("Input value: %d\n",  inputs[label][weightNum]);
                         }
                     } else {  // # of weights should = previous layer # of nodes
                         for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
@@ -265,6 +265,7 @@ void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* l
                     nn->layers[layerNum].weightedSum[nodeNum] = nn->layers[layerNum].nodesResults[nodeNum];
                     nn->layers[layerNum].nodesResults[nodeNum] =
                         CNeural_activation(nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF);
+                    printf("\t\tAfter activation: %f\n", nn->layers[layerNum].nodesResults[nodeNum]);
                     // printf("\n");
                 }
 
