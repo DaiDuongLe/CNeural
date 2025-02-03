@@ -80,7 +80,7 @@ int main() {
       }
     }
 
-//    printf("Training label: %d\n", *(trainingLabels + 8 + 1253));
+    // printf("Training label: %d\n", *(trainingLabels + 8 + 2));
 //    for (int i = 0; i < 10; i++) {
 //      printf("%f ", labelArr[1253][i]);
 //    }
@@ -91,7 +91,7 @@ int main() {
     int outputShape = 10;
     int numLabels = 59997; // same as features
     int numLayers = 3; // MUST be the same # of elements as in eachLayer[]
-    int eachLayer[] = {16, 16, 10}; // should include output layer as well, the same as outputShape
+    int eachLayer[] = {1, 1, 10}; // should include output layer as well, the same as outputShape
     string afs[] = {"sigmoid", "sigmoid", "sigmoid"}; // will not return 0 (error) when # of elements is < than # of layers, only checks for unknown af (strings)
 
     if (CNeural_init(&mnist, inputShape, outputShape, numLayers, eachLayer, afs, "random") != 0) {
@@ -103,21 +103,31 @@ int main() {
     if (lossFile == NULL) {
         printf("Error opening loss file\n");
     }
-    CNeural_train_ptr(&mnist, numLabels, trainArr, labelArr, "mse", "sgd", (float) 0.5, 100, 0.1, lossFile); // optimizer not implemented yet
+    CNeural_train_ptr(&mnist, numLabels, trainArr, labelArr, "categorical_cross_entropy", "sgd", (float) 0.1, 500, 0.1, lossFile); // optimizer not implemented yet
 
     // display image
     int imageNumber = 420;
-    for (int i = 0; i < 28; i++) {
-        for (int j = 0; j < 27; j++) {
-            if (trainArr[imageNumber - 1][i * 28 + j] == 0) {
-                printf("%d", trainArr[imageNumber - 1][i * 28 + j]);
-            } else if (trainArr[imageNumber - 1][i * 28 + j] == 1) {
-                printf("%d", trainArr[imageNumber - 1][i * 28 + j]);
-            }
-        }
-        printf("\n");
-    }
+    // for (int i = 0; i < 28; i++) {
+    //     for (int j = 0; j < 27; j++) {
+    //         if (trainArr[imageNumber - 1][i * 28 + j] == 0) {
+    //             printf("%d", trainArr[imageNumber - 1][i * 28 + j]);
+    //         } else if (trainArr[imageNumber - 1][i * 28 + j] == 1) {
+    //             printf("%d", trainArr[imageNumber - 1][i * 28 + j]);
+    //         }
+    //     }
+    //     printf("\n");
+    // }
+
+    printf("Training label: %d\n", *(trainingLabels + 8 + imageNumber - 1));
     CNeural_predict_ptr(&mnist, trainArr[imageNumber - 1]);
+    printf("Training label: %d\n", *(trainingLabels + 8 + 0));
+    CNeural_predict_ptr(&mnist, trainArr[0]);
+    printf("Training label: %d\n", *(trainingLabels + 8 + 1));
+    CNeural_predict_ptr(&mnist, trainArr[1]);
+    printf("Training label: %d\n", *(trainingLabels + 8 + 2125));
+    CNeural_predict_ptr(&mnist, trainArr[2125]);
+    printf("Training label: %d\n", *(trainingLabels + 8 + 5252));
+    CNeural_predict_ptr(&mnist, trainArr[5252]);
 //    CNeural_free(&mnist);
 
     clock_t stop = clock();

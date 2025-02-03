@@ -67,7 +67,7 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
 void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* labels[], string lossFunction, string optimizer, float learningRate, int epochs, float earlyStopLoss, FILE* lossFile);
 void CNeural_predict(NeuralNetwork *nn, float input[]);
 void CNeural_predict_ptr(NeuralNetwork *nn, char* input);
-float CNeural_activation(float input, string af);
+float CNeural_activation(NeuralNetwork *nn, float input, string af, int nodeNum);
 float CNeural_loss(float predicted[], float actual[], int outputShape, string lfn);
 void CNeural_free(NeuralNetwork *nn);
 

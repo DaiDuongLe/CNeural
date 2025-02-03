@@ -156,14 +156,16 @@ float CNeural_af_derivative(float input, string af) {
  * @return rate of change of the loss function with respect to nodeResults
 */
 float CNeural_loss_derivative(float predicted, float actual, string lfn) {
+
     if (strcmp(lfn, "mse") == 0) {
         return 2 * (predicted - actual);
     }
     if (strcmp(lfn, "mae") == 0) {
         // (might not be differentiable)
     }
+    // if (strcmp(lfn, "categorical_cross_entropy"))
 
-    printf("Warning: Unknown loss function. Training results might not be optimal!\n");
-    printf("Defaulting to MSE derivative\n");
+    // printf("Warning: Unknown loss function. Training results might not be optimal!\n");
+    // printf("Defaulting to MSE derivative\n");
     return 2 * (predicted - actual);
 }
