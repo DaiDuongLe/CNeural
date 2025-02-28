@@ -19,21 +19,21 @@
  * @param labels array of labels
  * @param lossFunction a string corresponding to a loss function
 */
-void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], string lossFunction) {
+void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], string lossFunction, int labelVal) {
     for (int layerNum = nn->nLayers - 1; layerNum >= 0; layerNum--) {
         for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
             if (layerNum == 0) { // last layer in backprop (first layer)
                 if (nn->nLayers == 1) { // if there's only 1 layer (no hidden layers)
                     for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
-                        float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum];
+                        float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum]; // previous label derivative
                         // printf("WeightderBEFORE: %f\n", previousDerivative);
-                        float currentDerivative = (float) 1.0/(float) nn->nLabels * inputs[weightNum] * CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * CNeural_loss_derivative(nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction);
+                        float currentDerivative = (float) 1.0/(float) nn->nLabels * inputs[weightNum] * CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, labelVal) * CNeural_loss_derivative(nn, nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction, labelVal);
                         // printf("WeightderCURRENT: %f\n", currentDerivative);
                         nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum] = previousDerivative + currentDerivative;
                     }
                     float previousDerivative = nn->layers[layerNum].nodes[nodeNum].biasDerivative;
                     // printf("BiasderPREVIOUS: %f\n", previousDerivative);
-                    float currentDerivative = (float) 1.0/(float) nn->nLabels * CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * CNeural_loss_derivative(nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction);
+                    float currentDerivative = (float) 1.0/(float) nn->nLabels * CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, labelVal) * CNeural_loss_derivative(nn, nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction, labelVal);
                     // printf("BiasderCURRENT: %f\n", currentDerivative);
                     nn->layers[layerNum].nodes[nodeNum].biasDerivative = previousDerivative + currentDerivative;
                 } else {
@@ -45,24 +45,30 @@ void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], stri
                     nn->layers[layerNum].nodesResultsDerivatives[nodeNum] = nodeResultDerivativeSum;
 
                     for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
-                        float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum];
+                        float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum]; // previous label derivative
                         // printf("WeightderBEFORE: %f\n", previousDerivative);
-                        float currentDerivative = (float) 1.0/(float) nn->nLabels * inputs[weightNum] * CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * nodeResultDerivativeSum;
+                        float currentDerivative = (float) 1.0/(float) nn->nLabels * inputs[weightNum] * CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, labelVal) * nodeResultDerivativeSum;
                         // printf("WeightderCURRENT: %f\n", currentDerivative);
                         nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum] = previousDerivative + currentDerivative;
                     }
                     float previousDerivative = nn->layers[layerNum].nodes[nodeNum].biasDerivative;
                     // printf("BiasderPREVIOUS: %f\n", previousDerivative);
-                    float currentDerivative = (float) 1.0/(float) nn->nLabels * CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * nodeResultDerivativeSum;
+                    float currentDerivative = (float) 1.0/(float) nn->nLabels * CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, labelVal) * nodeResultDerivativeSum;
                     // printf("BiasderCURRENT: %f\n", currentDerivative);
                     nn->layers[layerNum].nodes[nodeNum].biasDerivative = previousDerivative + currentDerivative;
                 }
             } else if (layerNum == nn->nLayers - 1) { // first layer in backprop (last layer)
-                nn->layers[layerNum].nodesResultsDerivatives[nodeNum] = CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * CNeural_loss_derivative(nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction);
+                if (strcmp(nn->layers[layerNum].nodes[nodeNum].AF, "softmax") == 0) {
+                    for (int i = 0; i < nn->outShape; i++) {
+                        nn->layers[layerNum].nodesResultsDerivatives[nodeNum] += CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, i) * CNeural_loss_derivative(nn, nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction, i); //d"af"/d"weightedSum" * d"cost"/d"af"
+                    }
+                } else {
+                    nn->layers[layerNum].nodesResultsDerivatives[nodeNum] = CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, labelVal) * CNeural_loss_derivative(nn, nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction, labelVal); //d"af"/d"weightedSum" * d"cost"/d"af"
+                }
                 for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
-                    float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum];
+                    float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum]; // previous label derivative
                     // printf("WeightderBEFORE: %f\n", previousDerivative);
-                    float currentDerivative = (float) 1.0/(float) nn->nLabels * nn->layers[layerNum - 1].nodesResults[weightNum] * nn->layers[layerNum].nodesResultsDerivatives[nodeNum];
+                    float currentDerivative = (float) 1.0/(float) nn->nLabels * nn->layers[layerNum - 1].nodesResults[weightNum] * nn->layers[layerNum].nodesResultsDerivatives[nodeNum]; // d"cost"/d"weight"
                     // printf("WeightderCURRENT: %f\n", currentDerivative);
                     nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum] = previousDerivative + currentDerivative;
                 }
@@ -82,13 +88,13 @@ void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], stri
                 for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
                     float previousDerivative = nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum];
                     // printf("WeightderBEFORE: %f\n", previousDerivative);
-                    float currentDerivative = (float) 1.0/(float) nn->nLabels * nn->layers[layerNum - 1].nodesResults[weightNum] * CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * nodeResultDerivativeSum;
+                    float currentDerivative = (float) 1.0/(float) nn->nLabels * nn->layers[layerNum - 1].nodesResults[weightNum] * CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, labelVal) * nodeResultDerivativeSum;
                     // printf("WeightderCURRENT: %f\n", currentDerivative);
                     nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum] = previousDerivative + currentDerivative;
                 }
                 float previousDerivative = nn->layers[layerNum].nodes[nodeNum].biasDerivative;
                 // printf("BiasderPREVIOUS: %f\n", previousDerivative);
-                float currentDerivative = (float) 1.0/(float) nn->nLabels * CNeural_af_derivative(nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF) * nodeResultDerivativeSum;
+                float currentDerivative = (float) 1.0/(float) nn->nLabels * CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, labelVal) * nodeResultDerivativeSum;
                 // printf("BiasderCURRENT: %f\n", currentDerivative);
                 nn->layers[layerNum].nodes[nodeNum].biasDerivative = previousDerivative + currentDerivative;
             }
@@ -125,7 +131,7 @@ void CNeural_update_weights(NeuralNetwork *nn) {
  * @param af a string corresponding to an activation function, values: "none", "sigmoid", "tanh", "relu", default: "relu"
  * @return rate of change of the activation function with respect to a weighted sum
 */
-float CNeural_af_derivative(float input, string af) {
+float CNeural_af_derivative(NeuralNetwork *nn, float input, string af, int nodeNum, int labelVal) {
     if (strcmp(af, "none") == 0) return 1;
     if (strcmp(af, "sigmoid") == 0) {
         return 1 / (1 + expf(-input)) * (1 - 1 / (1 + expf(-input)));
@@ -139,7 +145,13 @@ float CNeural_af_derivative(float input, string af) {
         }
         return 1;
     }
-    printf("Warning: Unknown activation function. Training results might not be optimal!\n");
+    if (strcmp(af, "softmax") == 0) {
+        if (nodeNum == labelVal) {
+            return nn->layers[nn->nLayers - 1].nodesResults[labelVal] * (1 - nn->layers[nn->nLayers - 1].nodesResults[labelVal]);
+        }
+        return -nn->layers[nn->nLayers - 1].nodesResults[nodeNum] * nn->layers[nn->nLayers - 1].nodesResults[labelVal];
+    }
+    printf("Warning: Unknown activation function derivative. Training results might not be optimal!\n");
     printf("Defaulting to ReLu derivative\n");
     if (input < 0) {
         return 0;
@@ -155,17 +167,18 @@ float CNeural_af_derivative(float input, string af) {
  * @param lfn a string corresponding to a loss function, values: "mse", "mae", default: "mse"
  * @return rate of change of the loss function with respect to nodeResults
 */
-float CNeural_loss_derivative(float predicted, float actual, string lfn) {
-
+float CNeural_loss_derivative(NeuralNetwork *nn, float predicted, float actual, string lfn, int labelVal) {
     if (strcmp(lfn, "mse") == 0) {
         return 2 * (predicted - actual);
     }
     if (strcmp(lfn, "mae") == 0) {
         // (might not be differentiable)
     }
-    // if (strcmp(lfn, "categorical_cross_entropy"))
+    if (strcmp(lfn, "categorical_cross_entropy") == 0) {
+        return -1 / nn->layers[nn->nLayers - 1].nodesResults[labelVal];
+    }
 
-    // printf("Warning: Unknown loss function. Training results might not be optimal!\n");
-    // printf("Defaulting to MSE derivative\n");
+    printf("Warning: Unknown loss function derivative. Training results might not be optimal!\n");
+    printf("Defaulting to MSE derivative\n");
     return 2 * (predicted - actual);
 }

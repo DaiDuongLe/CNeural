@@ -15,14 +15,14 @@
 
 #define AFStringSize 10 // TODO malloc for AF strings
 
-/* TODO WeightBias Proper Init, add better init options (Xavier, etc.)
+/* TODO WeightBias Proper Init, add better init options (Xavier, He etc.)
 // TODO Make strings enums?
 // TODO Labeling Issue? - classification & Prediction function
 // TODO Data Import - MNIST
 // TODO Save/Import Weights
 // TODO Check input/return value validation
 // TODO Error messages only to appear once!
-// TODO Check for softmax being used only in the last layer
+// TODO Check for softmax being used only in the last layer, currently doesn't check if it's used in other layers
 // TODO (optional) better interface - gui?
 */
 
@@ -94,7 +94,8 @@ int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->inShape);
                 if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
                 for (int j = 0; j < nn->inShape; j++) { // for each WEIGHT in node
-                    nn->layers[layerNum].nodes[i].weights[j] = (float) (-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0));
+                    // nn->layers[layerNum].nodes[i].weights[j] = (float) (-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0));
+                    nn->layers[layerNum].nodes[i].weights[j] = (float) ((-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0)) / 10);
                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;
                 }
             } else {  // # of weights should = previous layer # of nodes
@@ -102,11 +103,12 @@ int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
                 nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->layers[layerNum - 1].nNodes);
                 if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
                 for (int j = 0; j < nn->layers[layerNum - 1].nNodes; j++) { // for each WEIGHT in node
-                    nn->layers[layerNum].nodes[i].weights[j] = (float) (-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0));
+                    // nn->layers[layerNum].nodes[i].weights[j] = (float) (-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0));
+                    nn->layers[layerNum].nodes[i].weights[j] = (float) ((-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0)) / 10);
                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;
                 }
             }
-            nn->layers[layerNum].nodes[i].bias = 0; // bias can be 0
+            nn->layers[layerNum].nodes[i].bias = (float) ((-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0)) / 10); // bias can be 0
             nn->layers[layerNum].nodes[i].biasDerivative = 0;
             nn->layers[layerNum].nodes[i].AF = nn->layers[layerNum].layerAF; // applies to the whole layer
         }
@@ -202,7 +204,7 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
             nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf);
 
             // TODO implement optimizer flexibility (currently only gradient des.)
-            CNeural_derivatives(nn, inputs[label], labels[label], nn->lf);
+            CNeural_derivatives(nn, inputs[label], labels[label], nn->lf, (int) labelVal(labels[label], nn->outShape));
             // printf("\n");
 
             for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) { // clear after each label
@@ -273,9 +275,25 @@ void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* l
 
                     // printf("\t\tAfter activation: %f\n", CNeural_activation(nn, nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF), nodeNum);
                     nn->layers[layerNum].weightedSum[nodeNum] = nn->layers[layerNum].nodesResults[nodeNum];
+
+                    // if (layerNum == nn->nLayers - 1 && label == 40002) {
+                    //     printf("%f\n", nn->layers[layerNum].nodesResults[nodeNum]);
+                    //     printf(" %f\n", CNeural_activation(nn, nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum));
+                    // }
                     nn->layers[layerNum].nodesResults[nodeNum] =
                         CNeural_activation(nn, nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum);
+                    // if (layerNum == nn->nLayers - 1 && label == 40002) {
+                    //     printf("%f\n", nn->layers[layerNum].nodesResults[nodeNum]);
+                    //     printf(" %f\n", CNeural_activation(nn, nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum));
+                    //     printf("%f\n", nn->layers[layerNum].nodesResults[nodeNum]);
+                    // }
                     // printf("\t\tAfter activation: %f\n", nn->layers[layerNum].nodesResults[nodeNum]);
+
+                    // if (layerNum == nn->nLayers - 1) {
+                    //     for (int i = 0; i < nn->layers[layerNum].nNodes; i++) {
+                    //         printf("\t\tLoop After activation: %f\n", nn->layers[layerNum].nodesResults[i]);
+                    //     }
+                    // }
                     // printf("\n");
                 }
 
@@ -285,7 +303,7 @@ void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* l
             nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf);
 
             // TODO implement optimizer flexibility (currently only gradient des.)
-            CNeural_derivatives(nn, inputs[label], labels[label], nn->lf);
+            CNeural_derivatives(nn, inputs[label], labels[label], nn->lf, (int) labelVal(labels[label], nn->outShape));
             // printf("\n");
 
             for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) { // clear after each label
@@ -312,50 +330,16 @@ void CNeural_train_ptr(NeuralNetwork *nn, int numLabels, char* inputs[], char* l
     }
 }
 
-void CNeural_predict(NeuralNetwork *nn, float input[]) {
-    for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
-        for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
-            if (layerNum == 0) { // 1st layer # of weights should = # of inputs
-                for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
-                    nn->layers[layerNum].nodesResults[nodeNum] +=
-                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * input[weightNum];
-                }
-            } else {  // # of weights should = previous layer # of nodes
-                for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
-                    nn->layers[layerNum].nodesResults[nodeNum] +=
-                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; // adds for each linear combination (weighted sum)
-                }
-            }
-            nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
-            nn->layers[layerNum].nodesResults[nodeNum] = CNeural_activation(nn, nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum);
+float labelVal(float label[], int outputShape) {
+    int labelVal;
+    for (int i = 0; i < outputShape; i++) {
+        // printf("%f\n", label[i]);
+        if (label[i] != 0) {
+            // printf("%d\n", i);
+            labelVal = i;
         }
     }
-    for (int i = 0; i < nn->outShape; i++) {
-        printf("predicted: %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
-    }
-}
-
-void CNeural_predict_ptr(NeuralNetwork *nn, char* input) {
-    for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
-        for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
-            if (layerNum == 0) { // 1st layer # of weights should = # of inputs
-                for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
-                    nn->layers[layerNum].nodesResults[nodeNum] +=
-                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * input[weightNum];
-                }
-            } else {  // # of weights should = previous layer # of nodes
-                for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
-                    nn->layers[layerNum].nodesResults[nodeNum] +=
-                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; // adds for each linear combination (weighted sum)
-                }
-            }
-            nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
-            nn->layers[layerNum].nodesResults[nodeNum] = CNeural_activation(nn, nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum);
-        }
-    }
-    for (int i = 0; i < nn->outShape; i++) {
-        printf("predicted: %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
-    }
+    return labelVal;
 }
 
 /**
@@ -377,26 +361,39 @@ float CNeural_activation(NeuralNetwork *nn, float input, string af, int nodeNum)
     if (strcmp(af, "relu") == 0) {
         return fmaxf(0, input);
     }
-    if (nn->layers[nn->nLayers - 1].nNodes - 1 == nodeNum) { // softmax only works for the last layer
-        printf("Entered SOFTMAX");
-        if (strcmp(af, "softmax") == 0) {
-            printf("input: %f\n", input);
-            float maxVal = nn->layers[nn->nLayers - 1].nodesResults[0];
-            for (int i = 1; i < nn->layers[nn->nLayers - 1].nNodes; i++) {
-                if (nn->layers[nn->nLayers - 1].nodesResults[i] > maxVal) {
-                    maxVal = nn->layers[nn->nLayers - 1].nodesResults[i];
-                }
-            }
-            printf("maxVal: %f\n", maxVal);
+    if (strcmp(af, "softmax") == 0) {
+        // softmax only works when the LAST nodeRes has been calculated, should only be used for the last layer
+        if (nn->layers[nn->nLayers - 1].nNodes - 1 == nodeNum) {
+            // printf("Entered SOFTMAX");
+            //
+            // printf("input: %f\n", input);
+            // float maxVal = nn->layers[nn->nLayers - 1].nodesResults[0];
+            // for (int i = 1; i < nn->layers[nn->nLayers - 1].nNodes; i++) {
+            //     if (nn->layers[nn->nLayers - 1].nodesResults[i] > maxVal) {
+            //         maxVal = nn->layers[nn->nLayers - 1].nodesResults[i];
+            //     }
+            // }
+            // printf("maxVal: %f\n", maxVal);
             float sum = 0;
             for (int i = 0; i < nn->layers[nn->nLayers - 1].nNodes; i++) {
-                printf("noderes: %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
-                printf("eToNoderes: %f\n", expf(nn->layers[nn->nLayers - 1].nodesResults[i]));
-                sum += nn->layers[nn->nLayers - 1].nodesResults[i];
+                // printf("noderes: %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
+                // printf("eToNoderes: %f\n", expf(nn->layers[nn->nLayers - 1].nodesResults[i]));
+                sum += expf(nn->layers[nn->nLayers - 1].nodesResults[i]);
             }
-            printf("sum: %f\n", sum);
-            printf("softmax: %f\n", expf(input)/sum);
-            return expf(input)/sum;
+            // printf("sum: %f\n", sum);
+            for (int i = 0; i < nn->layers[nn->nLayers - 1].nNodes; i++) {
+                // printf("%f\n", expf(nn->layers[nn->nLayers - 1].nodesResults[i]) / sum);
+                // printf("inside before %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
+                nn->layers[nn->nLayers - 1].nodesResults[i] = expf(nn->layers[nn->nLayers - 1].nodesResults[i]) / sum;
+                // printf("inside %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
+                if (i == nn->layers[nn->nLayers - 1].nNodes - 1) {
+                    // printf("inside last %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
+                    return nn->layers[nn->nLayers - 1].nodesResults[i];
+                }
+            }
+
+            // printf("%f\n", expf(input)/sum);
+            // return expf(input)/sum;
         }
     }
     if (strcmp(af, "softmax") != 0) {
@@ -404,6 +401,7 @@ float CNeural_activation(NeuralNetwork *nn, float input, string af, int nodeNum)
         printf("Defaulting to ReLu\n");
         return fmaxf(0, input);
     }
+    return input;
 }
 
 /**
@@ -445,6 +443,80 @@ float CNeural_loss(float predicted[], float actual[], int outputShape, string lf
         sum += powf(predicted[i] - actual[i], 2);
     }
     return sum;
+}
+
+void CNeural_predict(NeuralNetwork *nn, float input[]) {
+    // Draws Input
+    // for (int i = 0; i < 28; i++) {
+    //     for (int j = 0; j < 27; j++) {
+    //         if (input[i * 28 + j] == 0) {
+    //             printf("%d", input[i * 28 + j]);
+    //         } else if (input[i * 28 + j] == 1) {
+    //             printf("%d", input[i * 28 + j]);
+    //         }
+    //     }
+    //     printf("\n");
+    // }
+    for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
+        for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
+            if (layerNum == 0) { // 1st layer # of weights should = # of inputs
+                for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
+                    nn->layers[layerNum].nodesResults[nodeNum] +=
+                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * input[weightNum];
+                }
+            } else {  // # of weights should = previous layer # of nodes
+                for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
+                    nn->layers[layerNum].nodesResults[nodeNum] +=
+                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; // adds for each linear combination (weighted sum)
+                }
+            }
+            nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
+            nn->layers[layerNum].nodesResults[nodeNum] = CNeural_activation(nn, nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum);
+        }
+    }
+    for (int i = 0; i < nn->outShape; i++) {
+        printf("predicted: %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
+    }
+    for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) { // clear after each label
+        CNeural_clear_nodeResults(nn, layerNum);
+    }
+}
+
+void CNeural_predict_ptr(NeuralNetwork *nn, char* input) {
+    // Draws Input
+    // for (int i = 0; i < 28; i++) {
+    //     for (int j = 0; j < 27; j++) {
+    //         if (input[i * 28 + j] == 0) {
+    //             printf("%d", input[i * 28 + j]);
+    //         } else if (input[i * 28 + j] == 1) {
+    //             printf("%d", input[i * 28 + j]);
+    //         }
+    //     }
+    //     printf("\n");
+    // }
+    for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
+        for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
+            if (layerNum == 0) { // 1st layer # of weights should = # of inputs
+                for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
+                    nn->layers[layerNum].nodesResults[nodeNum] +=
+                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * input[weightNum];
+                }
+            } else {  // # of weights should = previous layer # of nodes
+                for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
+                    nn->layers[layerNum].nodesResults[nodeNum] +=
+                        nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; // adds for each linear combination (weighted sum)
+                }
+            }
+            nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
+            nn->layers[layerNum].nodesResults[nodeNum] = CNeural_activation(nn, nn->layers[layerNum].nodesResults[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum);
+        }
+    }
+    for (int i = 0; i < nn->outShape; i++) {
+        printf("predicted: %f\n", nn->layers[nn->nLayers - 1].nodesResults[i]);
+    }
+    for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) { // clear after each label
+        CNeural_clear_nodeResults(nn, layerNum);
+    }
 }
 
 /**
