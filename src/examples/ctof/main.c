@@ -3,7 +3,7 @@
  * \brief Example use of CNeural, finding Celsius to Fahrenheit function.
  *
  * \author Dai Duong Le
- * \version: 0.1.2
+ * \version: 1.0.0
 */
 #include <stdio.h>
 #include <time.h>

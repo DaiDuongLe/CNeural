@@ -3,7 +3,7 @@
  * \brief Source file for CNeural, containing function definitions.
  *
  * \author Dai Duong Le
- * \version: 0.1.2
+ * \version: 1.0.0
 */
 
 #include <stdio.h>
@@ -73,6 +73,12 @@ int CNeural_init(NeuralNetwork *nn, int inputShape, int outputShape, int numLaye
     return 0;
 }
 
+
+float nrandom() {
+    float u = (float) rand() / RAND_MAX;
+    float v = (float) rand() / RAND_MAX;
+    return sqrt(-2.0 * logf(u)) * cosf(2.0 * M_PI * v);
+}
 /**
  * Initializes the weights and biases. Helper function to CNeural_init.
  *
@@ -81,9 +87,11 @@ int CNeural_init(NeuralNetwork *nn, int inputShape, int outputShape, int numLaye
  * @param option a string corresponding to an initialization method, values: "zero", "random"
  * @return returns 0 for sucess
 */
+
 int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
     //TODO (optional) calculate mean, variance, standard deviation for measuring appropriateness
-    srand((unsigned int) time(NULL)); // init random generator
+
+    srand(time(NULL)); // init seed random generator
 
     if (strcmp(option, "zero") == 0) {
         // probably not a good init option
@@ -95,7 +103,7 @@ int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
                 if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
                 for (int j = 0; j < nn->inShape; j++) { // for each WEIGHT in node
                     // nn->layers[layerNum].nodes[i].weights[j] = (float) (-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0));
-                    nn->layers[layerNum].nodes[i].weights[j] = (float) ((-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0)) / 10);
+                    nn->layers[layerNum].nodes[i].weights[j] = (float) ((-0.3f + 0.6f * rand() / ((double) RAND_MAX + 1.0)) / 10);
                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;
                 }
             } else {  // # of weights should = previous layer # of nodes
@@ -104,14 +112,44 @@ int CNeural_wb_init(NeuralNetwork *nn, int layerNum, string option) {
                 if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
                 for (int j = 0; j < nn->layers[layerNum - 1].nNodes; j++) { // for each WEIGHT in node
                     // nn->layers[layerNum].nodes[i].weights[j] = (float) (-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0));
-                    nn->layers[layerNum].nodes[i].weights[j] = (float) ((-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0)) / 10);
+                    nn->layers[layerNum].nodes[i].weights[j] = (float) ((-0.3f + 0.6f * rand() / ((double) RAND_MAX + 1.0)) / 10);
                     nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;
                 }
             }
-            nn->layers[layerNum].nodes[i].bias = (float) ((-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0)) / 10); // bias can be 0
+            nn->layers[layerNum].nodes[i].bias = (float) 0; // bias can be 0
+            // nn->layers[layerNum].nodes[i].bias = (float) ((-0.3f + 0.6f * rand() / ((double) RAND_MAX + 1.0)) / 1);
             nn->layers[layerNum].nodes[i].biasDerivative = 0;
             nn->layers[layerNum].nodes[i].AF = nn->layers[layerNum].layerAF; // applies to the whole layer
         }
+
+        // for (int i = 0; i < nn->layers[layerNum].nNodes; i++) { // for each NODE in layer init weights
+        //     if (layerNum == 0) { // first layer # of weights should = # of inputs
+        //         nn->layers[layerNum].nodes[i].weights = malloc(sizeof(float) * (unsigned int) nn->inShape);
+        //         nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->inShape);
+        //         if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
+        //
+        //         float std = sqrt(2.0 / (float) nn->inShape);
+        //         for (int j = 0; j < nn->inShape; j++) { // for each WEIGHT in node
+        //             nn->layers[layerNum].nodes[i].weights[j] = nrandom() * std;
+        //             nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;
+        //         }
+        //     } else {  // # of weights should = previous layer # of nodes
+        //         nn->layers[layerNum].nodes[i].weights = malloc(sizeof(float) * (unsigned int) nn->layers[layerNum - 1].nNodes);
+        //         nn->layers[layerNum].nodes[i].weightDerivatives = malloc(sizeof(float) * (unsigned int) nn->layers[layerNum - 1].nNodes);
+        //
+        //         float std = sqrt(2.0 / (float) nn->layers[layerNum - 1].nNodes);
+        //         if (nn->layers[layerNum].nodes[i].weights == NULL || nn->layers[layerNum].nodes[i].weightDerivatives == NULL) { printf("Error: Failed to allocate memory!"); return 1; }
+        //         for (int j = 0; j < nn->layers[layerNum - 1].nNodes; j++) { // for each WEIGHT in node
+        //             // nn->layers[layerNum].nodes[i].weights[j] = (float) (-1.0f + 2.0f * rand() / ((double) RAND_MAX + 1.0));
+        //             nn->layers[layerNum].nodes[i].weights[j] = nrandom() * std;
+        //             // printf("%f\n", nn->layers[layerNum].nodes[i].weights[j]);
+        //             nn->layers[layerNum].nodes[i].weightDerivatives[j] = 0;
+        //         }
+        //     }
+        //     nn->layers[layerNum].nodes[i].bias = (float) 0; // bias can be 0
+        //     nn->layers[layerNum].nodes[i].biasDerivative = 0;
+        //     nn->layers[layerNum].nodes[i].AF = nn->layers[layerNum].layerAF; // applies to the whole layer
+        // }
     } else {
         printf("Error: Unknown initialization method.");
         return 1;

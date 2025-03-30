@@ -24,7 +24,7 @@ int main() {
       }
     }
 
-    char* trainArr[59997];
+    char* trainArr[59998];
     for (int i = 0; i < 59998; i++) {
         trainArr[i] = trainingDataset + 16 + i * 784;
     }
@@ -32,7 +32,7 @@ int main() {
 //    for (int i = 0; i < 59998; i++) {
 //      labelCharArr[i] = trainingLabels + 8 + i;
 //    }
-    float* labelArr[59997];
+    float* labelArr[59998];
 
     float arr0[] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     float arr1[] = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -91,8 +91,9 @@ int main() {
     int outputShape = 10;
     int numLabels = 59997; // same as features
     int numLayers = 3; // MUST be the same # of elements as in eachLayer[]
-    int eachLayer[] = {32, 16, 10}; // should include output layer as well, the same as outputShape
-    string afs[] = {"relu", "relu", "softmax"}; // will not return 0 (error) when # of elements is < than # of layers, only checks for unknown af (strings)
+    int eachLayer[] = {512, 200, 10}; // should include output layer as well, the same as outputShape
+    // string afs[] = {"relu", "relu", "softmax"}; // will not return 0 (error) when # of elements is < than # of layers, only checks for unknown af (strings)
+    string afs[] = {"relu", "relu", "softmax"};
 
     if (CNeural_init(&mnist, inputShape, outputShape, numLayers, eachLayer, afs, "random") != 0) {
       printf("Error: Initialization failed.");
@@ -103,7 +104,7 @@ int main() {
     if (lossFile == NULL) {
         printf("Error opening loss file\n");
     }
-    CNeural_train_ptr(&mnist, numLabels, trainArr, labelArr, "categorical_cross_entropy", "sgd", (float) 0.1, 200, 1, lossFile); // optimizer not implemented yet
+    CNeural_train_ptr(&mnist, numLabels, trainArr, labelArr, "mse", "sgd", (float) 0.1, 100, 0.5, lossFile); // optimizer not implemented yet
 
     // display image
     int imageNumber = 3;

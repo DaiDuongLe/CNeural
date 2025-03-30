@@ -109,16 +109,20 @@ void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], stri
 */
 void CNeural_update_weights(NeuralNetwork *nn) {
     for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
+        // printf("Layer %d\n", layerNum);
         for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
             if (layerNum == 0) { // 1st layer # of weights should = # of inputs
                 for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
+                    // printf("%f\n", -nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum]);
                     nn->layers[layerNum].nodes[nodeNum].weights[weightNum] += nn->lr * -nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum]; // negative gradient (downhill direction)
                 }
             } else {  // # of weights should = previous layer # of nodes
                 for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
+                    // printf("%f\n", -nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum]);
                     nn->layers[layerNum].nodes[nodeNum].weights[weightNum] += nn->lr * -nn->layers[layerNum].nodes[nodeNum].weightDerivatives[weightNum]; // negative gradient (downhill direction)
                 }
             }
+            // printf("%f\n", -nn->layers[layerNum].nodes[nodeNum].biasDerivative);
             nn->layers[layerNum].nodes[nodeNum].bias += nn->lr * -nn->layers[layerNum].nodes[nodeNum].biasDerivative; // negative gradient (downhill direction)
         }
     }
