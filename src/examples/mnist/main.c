@@ -104,7 +104,7 @@ int main() {
     if (lossFile == NULL) {
         printf("Error opening loss file\n");
     }
-    CNeural_train_ptr(&mnist, numLabels, trainArr, labelArr, "mse", "sgd", (float) 0.1, 100, 0.5, lossFile); // optimizer not implemented yet
+    CNeural_train_ptr(&mnist, numLabels, trainArr, labelArr, "categorical_cross_entropy", "sgd", (float) 1, 100, 0.5, lossFile); // optimizer not implemented yet
 
     // display image
     int imageNumber = 3;

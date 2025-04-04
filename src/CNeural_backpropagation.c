@@ -59,9 +59,9 @@ void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], stri
                 }
             } else if (layerNum == nn->nLayers - 1) { // first layer in backprop (last layer)
                 if (strcmp(nn->layers[layerNum].nodes[nodeNum].AF, "softmax") == 0) {
-                    for (int i = 0; i < nn->outShape; i++) {
-                        nn->layers[layerNum].nodesResultsDerivatives[nodeNum] += CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, i) * CNeural_loss_derivative(nn, nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction, i); //d"af"/d"weightedSum" * d"cost"/d"af"
-                    }
+                    // for (int i = 0; i < nn->outShape; i++) {
+                        nn->layers[layerNum].nodesResultsDerivatives[nodeNum] += CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, labelVal) * CNeural_loss_derivative(nn, nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction, labelVal); //d"af"/d"weightedSum" * d"cost"/d"af"
+                    // }
                 } else {
                     nn->layers[layerNum].nodesResultsDerivatives[nodeNum] = CNeural_af_derivative(nn, nn->layers[layerNum].weightedSum[nodeNum], nn->layers[layerNum].nodes[nodeNum].AF, nodeNum, labelVal) * CNeural_loss_derivative(nn, nn->layers[layerNum].nodesResults[nodeNum], labels[nodeNum], lossFunction, labelVal); //d"af"/d"weightedSum" * d"cost"/d"af"
                 }
