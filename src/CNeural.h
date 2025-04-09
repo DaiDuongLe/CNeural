@@ -69,7 +69,7 @@ void CNeural_predict(NeuralNetwork *nn, float input[]);
 void CNeural_predict_ptr(NeuralNetwork *nn, char* input);
 float labelVal(float label[], int outputShape);
 float CNeural_activation(NeuralNetwork *nn, float input, string af, int nodeNum);
-float CNeural_loss(float predicted[], float actual[], int outputShape, string lfn);
+float CNeural_loss(float predicted[], float actual[], int outputShape, string lfn, int labelVal);
 void CNeural_free(NeuralNetwork *nn);
 
 void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], string lossFunction, int labelVal);

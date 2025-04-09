@@ -9,8 +9,9 @@ add_executable(CNeural
         src/CNeural.c
 #        CNeural_draw.c
         src/CNeural_backpropagation.c
-        src/examples/mnist/main.c
-#        src/examples/test/main.c
+#        src/examples/mnist/main.c
+        src/examples/hardcode/main.c
+        #        src/examples/test/main.c
 )
 
 target_link_libraries(CNeural m)
