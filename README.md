@@ -48,11 +48,11 @@ Requirements: Implement a neural network in C
 
 - Softmax:
     - StatQuest softmax & derivatives:
-        - [Statquest softmax](https://www.youtube.com/watch?v=KpKog-L9veg&t=630s)
+        - [Statquest softmax](https://www.youtube.com/watch?v=KpKog-L9veg&t)
 - Cross entropy:
     - StatQuest cross entropy & derivatives:
-        - [Statquest cross entropy](https://www.youtube.com/watch?v=6ArSys5qHAU&t=161s)
-        - [Statquest cross entropy](https://www.youtube.com/watch?v=xBEh66V9gZo&t=1039s)
+        - [Statquest cross entropy](https://www.youtube.com/watch?v=6ArSys5qHAU&t)
+        - [Statquest cross entropy](https://www.youtube.com/watch?v=xBEh66V9gZo&t)
 
 
 ### Achievements:
