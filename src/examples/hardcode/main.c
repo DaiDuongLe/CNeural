@@ -16,6 +16,7 @@ int main() {
     NeuralNetwork *ctof = malloc( sizeof(NeuralNetwork) );
     if (ctof == NULL) {
         printf("malloc failed\n");
+        return 1;
     }
 
     int inputShape = 2;
@@ -54,13 +55,11 @@ int main() {
     ctof->layers[1].nodes[2].bias = (float) 1;
 
     float features[3][2] = {
-        // {-273},
         {0.04, 0.42},
         {1, 0.54},
         {0.5, 0.37}
     };
     float labels[3][3] = {
-        // {(float) -459.4},
         {1, 0, 0},
         {0, 1, 0},
         {0, 0, 1}
@@ -75,7 +74,7 @@ int main() {
     }
     // printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
     // printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
-    CNeural_train(ctof, numLabels, features, labels, "categorical_cross_entropy", "sgd", (float) 1, 3, 0, lossFile); // optimizer not implemented yet
+    CNeural_train(ctof, numLabels, features, labels, "categorical_cross_entropy", "sgd", (float) 1, 1, 0, lossFile); // optimizer not implemented yet
     // printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
     // printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
 
@@ -84,8 +83,6 @@ int main() {
     CNeural_predict(ctof, features[0]);
     printf("\n");
     CNeural_predict(ctof, features[1]);
-    printf("\n");
-    CNeural_predict(ctof, features[0]);
     printf("\n");
     CNeural_predict(ctof, features[2]);
     // CNeural_free(&ctof);

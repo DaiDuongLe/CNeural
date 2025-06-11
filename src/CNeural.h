@@ -8,6 +8,7 @@
 #pragma once
 
 #include <stdio.h>
+#include <windows.h>
 
 #ifndef CNEURAL_H
 #define CNEURAL_H
@@ -76,4 +77,6 @@ void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], stri
 void CNeural_update_weights(NeuralNetwork *nn);
 float CNeural_af_derivative(NeuralNetwork *nn, float input, string af, int nodeNum, int labelVal);
 float CNeural_loss_derivative(NeuralNetwork *nn, float predicted, float actual, string lfn, int labelVal);
+
+void setColor(int color);
 #endif //CNEURAL_H

@@ -110,8 +110,18 @@ void CNeural_derivatives(NeuralNetwork *nn, float inputs[], float labels[], stri
  * @param nn neural network type
 */
 void CNeural_update_weights(NeuralNetwork *nn) {
+    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+    WORD saved_attributes;
+
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+    saved_attributes = consoleInfo.wAttributes;
+
+
     for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
+        setColor(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
         printf("Layer %d\n", layerNum);
+        setColor(saved_attributes);
         for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
             if (layerNum == 0) { // 1st layer # of weights should = # of inputs
                 for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
@@ -126,7 +136,7 @@ void CNeural_update_weights(NeuralNetwork *nn) {
                 }
             }
             if (layerNum == nn->nLayers - 1) {
-                printf("Bias der: %f\n", nn->layers[layerNum].nodes[nodeNum].biasDerivative);
+                printf("\tBias der: %f\n", nn->layers[layerNum].nodes[nodeNum].biasDerivative);
             }
 
             nn->layers[layerNum].nodes[nodeNum].bias += nn->lr * -nn->layers[layerNum].nodes[nodeNum].biasDerivative; // negative gradient (downhill direction)
