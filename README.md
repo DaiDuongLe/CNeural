@@ -61,7 +61,7 @@ Requirements: Implement a neural network in C
     - Add more initialization options to weights & biases
 - Backpropagation and Optimization:
     - Convergence for MNIST
-    - Stochastic Gradient Descend + Batching (improvement over raw GD)
+    - Stochastic Gradient Descent + Batching (improvement over raw GD)
     - Other optimizers (Adam, RMSprop, etc.)
     - Multithreading
     - Optimize Naive Matrix Multiplication
