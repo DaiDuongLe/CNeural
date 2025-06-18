@@ -1,6 +1,6 @@
 /**
  * \file main.c
- * \brief Example use of CNeural, finding Celsius to Fahrenheit function.
+ * \brief Example use of CNeural, classifying Iris species using petal width and length.
  *
  * \author Dai Duong Le
  * \version: 1.0.0
@@ -13,8 +13,8 @@
 int main() {
     clock_t start = clock();
 
-    NeuralNetwork *ctof = malloc( sizeof(NeuralNetwork) );
-    if (ctof == NULL) {
+    NeuralNetwork *iris = malloc( sizeof(NeuralNetwork) );
+    if (iris == NULL) {
         printf("malloc failed\n");
         return 1;
     }
@@ -26,33 +26,11 @@ int main() {
     int eachLayer[] = {6, 3}; // should include output layer as well, the same as outputShape
     string afs[] = {"relu", "softmax"}; // will not return 0 (error) when # of elements is < than # of layers, only checks for unknown af (strings)
 
-    if (CNeural_init(ctof, inputShape, outputShape, numLayers, eachLayer, afs, "random") != 0) {
+    if (CNeural_init(iris, inputShape, outputShape, numLayers, eachLayer, afs, "random") != 0) {
         printf("Error: Initialization failed.");
         return 1;
     }
     printf("Initialization successful.\n");
-    // printf("Test: %d", ctof.nLayers);
-    // equation for calculating Celsius to Fahrenheit with 1 node
-    // ctof->layers[0].nodes[0].weights[0] = (float) -2.5;
-    // ctof->layers[0].nodes[0].weights[1] = (float) 0.6;
-    // ctof->layers[0].nodes[0].bias = (float) 1.6;
-    //
-    // ctof->layers[0].nodes[1].weights[0] = (float) -1.5;
-    // ctof->layers[0].nodes[1].weights[1] = (float) 0.4;
-    // ctof->layers[0].nodes[1].bias = (float) 0.7;
-    // //
-    //
-    // ctof->layers[1].nodes[0].weights[0] = (float) -0.1;
-    // ctof->layers[1].nodes[0].weights[1] = (float) 1.5;
-    // ctof->layers[1].nodes[0].bias = (float) -2;
-    //
-    // ctof->layers[1].nodes[1].weights[0] = (float) 2.4;
-    // ctof->layers[1].nodes[1].weights[1] = (float) -5.2;
-    // ctof->layers[1].nodes[1].bias = (float) 0;
-    //
-    // ctof->layers[1].nodes[2].weights[0] = (float) -2.2;
-    // ctof->layers[1].nodes[2].weights[1] = (float) 3.7;
-    // ctof->layers[1].nodes[2].bias = (float) 1;
 
     float features[150][2] = {
         {1.4, 0.2}, {1.4, 0.2}, {1.3, 0.2}, {1.5, 0.2}, {1.4, 0.2},
@@ -65,6 +43,7 @@ int main() {
         {1.2, 0.2}, {1.3, 0.2}, {1.5, 0.1}, {1.3, 0.2}, {1.5, 0.2},
         {1.3, 0.3}, {1.3, 0.3}, {1.3, 0.2}, {1.6, 0.6}, {1.9, 0.4},
         {1.4, 0.3}, {1.6, 0.2}, {1.4, 0.2}, {1.5, 0.2}, {1.4, 0.2},
+
         {4.7, 1.4}, {4.5, 1.5}, {4.9, 1.5}, {4.0, 1.3}, {4.6, 1.5},
         {4.5, 1.3}, {4.7, 1.6}, {3.3, 1.0}, {4.6, 1.3}, {3.9, 1.4},
         {3.5, 1.0}, {4.2, 1.5}, {4.0, 1.0}, {4.7, 1.4}, {3.6, 1.3},
@@ -75,6 +54,7 @@ int main() {
         {4.5, 1.6}, {4.7, 1.5}, {4.4, 1.3}, {4.1, 1.3}, {4.0, 1.3},
         {4.4, 1.2}, {4.6, 1.4}, {4.0, 1.2}, {3.3, 1.0}, {4.2, 1.3},
         {4.2, 1.2}, {4.2, 1.3}, {4.3, 1.3}, {3.0, 1.1}, {4.1, 1.3},
+
         {6.0, 2.5}, {5.1, 1.9}, {5.9, 2.1}, {5.6, 1.8}, {5.8, 2.2},
         {6.6, 2.1}, {4.5, 1.7}, {6.3, 1.8}, {5.8, 1.8}, {6.1, 2.5},
         {5.1, 2.0}, {5.3, 1.9}, {5.5, 2.1}, {5.0, 2.0}, {5.1, 2.4},
@@ -97,49 +77,43 @@ int main() {
             labels[i][0] = 0; labels[i][1] = 0; labels[i][2] = 1;
         }
     }
-    // printf("%f, %f, %f", labels[100][0], labels[100][1], labels[100][2]);
-    // printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
-    // printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
+
     FILE* lossFile = fopen("loss.csv", "a");
     if (lossFile == NULL) {
         printf("Error opening loss file\n");
     }
-    // printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
-    // printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
-    CNeural_train(ctof, numLabels, features, labels, "categorical_cross_entropy", "sgd", (float) 0.001, 250, 50, lossFile); // optimizer not implemented yet
-    // printf("Weight: %f\n", ctof.layers[0].nodes[0].weights[0]);
-    // printf("Bias: %f\n", ctof.layers[0].nodes[0].bias);
 
-    // printf("Bias: %f\n", ctof->layers[1].nodes[0].bias);
+    CNeural_train(iris, numLabels, features, labels, "categorical_cross_entropy", "sgd", (float) 0.001, 250, 30, lossFile); // optimizer not implemented yet
+
     printf("Setosa: \n");
-    CNeural_predict(ctof, features[0]);
+    CNeural_predict(iris, features[0]);
     printf("\n");
-    CNeural_predict(ctof, features[15]);
+    CNeural_predict(iris, features[15]);
     printf("\n");
-    CNeural_predict(ctof, features[39]);
+    CNeural_predict(iris, features[39]);
     printf("\n");
-    CNeural_predict(ctof, features[46]);
+    CNeural_predict(iris, features[46]);
     printf("\n");
 
     printf("Versicolor: \n");
-    CNeural_predict(ctof, features[55]);
+    CNeural_predict(iris, features[55]);
     printf("\n");
-    CNeural_predict(ctof, features[67]);
+    CNeural_predict(iris, features[67]);
     printf("\n");
-    CNeural_predict(ctof, features[88]);
+    CNeural_predict(iris, features[88]);
     printf("\n");
-    CNeural_predict(ctof, features[90]);
+    CNeural_predict(iris, features[90]);
     printf("\n");
 
     printf("Virginica: \n");
-    CNeural_predict(ctof, features[110]);
+    CNeural_predict(iris, features[110]);
     printf("\n");
-    CNeural_predict(ctof, features[120]);
+    CNeural_predict(iris, features[120]);
     printf("\n");
-    CNeural_predict(ctof, features[135]);
+    CNeural_predict(iris, features[135]);
     printf("\n");
-    CNeural_predict(ctof, features[144]);
-    // CNeural_free(&ctof);
+    CNeural_predict(iris, features[144]);
+    CNeural_free(iris);
 
     clock_t stop = clock();
     double elapsed = (double) (stop - start) / CLOCKS_PER_SEC;

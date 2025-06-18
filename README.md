@@ -41,37 +41,36 @@ $ ./main
 ## PVA Requirements
 Name: Dai Duong Le  
 Class: C1  
-Grading Period: 3rd quarter  
+Grading Period: 4rd quarter  
 Requirements: Implement a neural network in C  
 
 ### Steps:
 
-- Softmax:
-    - StatQuest softmax & derivatives:
-        - [Statquest softmax](https://www.youtube.com/watch?v=KpKog-L9veg&t)
-- Cross entropy:
-    - StatQuest cross entropy & derivatives:
-        - [Statquest cross entropy](https://www.youtube.com/watch?v=6ArSys5qHAU&t)
-        - [Statquest cross entropy](https://www.youtube.com/watch?v=xBEh66V9gZo&t)
+- Simplify Softmax + Cross Entropy derivatives
+- Fix loss reporting (reset after each epoch)
+- Train and validate results manually by changing step size and loss threshold until convergence
 
 
 ### Achievements:
-- Backpropagation of all layers
-- Softmax activation function
-- Cross Entropy loss
-- MNIST dataset import
+- **Iris dataset convergence and successful prediction**
+- Backpropagation for Softmax + Cross Entropy simplified
+- Corrected loss reporting
 
-### Next steps/goals:
+### Next steps/goals (nice to haves, doesn't affect functionality):
 - Parameter Initialization:
-    - Check HE init. is correct
     - Add more initialization options to weights & biases
-- Backpropagation:
+- Backpropagation and Optimization:
     - Convergence for MNIST
+    - Stochastic Gradient Descend + Batching (improvement over raw GD)
+    - Other optimizers (Adam, RMSprop, etc.)
+    - Multithreading
+    - Optimize Naive Matrix Multiplication
 - Prediction:
     - Improve label handling
     - Saving network parameters to a standardized format
+    - Argmax instead of Softmax for better readability
 - Cleanup:
-    - Reorganize code and redo documentation
+    - Reorganize code, versioning and redo technical documentation 
 - Other:
     - GUI interface using Clay
     - Consolidate into a C library
