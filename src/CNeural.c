@@ -231,18 +231,18 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
     for (int epoch = 1; epoch <= nn->epochs; epoch++) {
         printf("Epoch %d/%d\n", epoch, nn->epochs);
         for (int label = 0; label < numLabels; label++) {
-            setColor(FOREGROUND_RED | FOREGROUND_INTENSITY);
-            printf("Label: %d\n", label + 1);
-            setColor(saved_attributes);
+            // setColor(FOREGROUND_RED | FOREGROUND_INTENSITY);
+            // printf("Label: %d\n", label + 1);
+            // setColor(saved_attributes);
             for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) {
-                setColor(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
-                printf("Layer %d\n", layerNum + 1);
-                setColor(saved_attributes);
+                // setColor(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+                // printf("Layer %d\n", layerNum + 1);
+                // setColor(saved_attributes);
 
                 for (int nodeNum = 0; nodeNum < nn->layers[layerNum].nNodes; nodeNum++) {
-                    setColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-                    printf("\tNode %d\n", nodeNum + 1);
-                    setColor(saved_attributes);
+                    // setColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+                    // printf("\tNode %d\n", nodeNum + 1);
+                    // setColor(saved_attributes);
                     if (layerNum == 0) { // 1st layer # of weights should = # of inputs
                         for (int weightNum = 0; weightNum < nn->inShape; weightNum++) {
                             // printf("\t\tWeight %d: %f ", weightNum + 1, nn->layers[0].nodes[nodeNum].weights[weightNum]);
@@ -250,21 +250,21 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
                             nn->layers[layerNum].nodesResults[nodeNum] +=
                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * inputs[label][weightNum]; // adds for each linear combination (weighted sum)
 
-                            printf("\t\tNoderes value: %f\n", nn->layers[0].nodesResults[nodeNum]);
+                            // printf("\t\tNoderes value: %f\n", nn->layers[0].nodesResults[nodeNum]);
                         }
                     } else {  // # of weights should = previous layer # of nodes
                         for (int weightNum = 0; weightNum < nn->layers[layerNum - 1].nNodes; weightNum++) {
                             // printf("\t\tWeight %d: %f \t", weightNum + 1, nn->layers[layerNum].nodes[nodeNum].weights[weightNum]);
                             nn->layers[layerNum].nodesResults[nodeNum] +=
                                 nn->layers[layerNum].nodes[nodeNum].weights[weightNum] * nn->layers[layerNum - 1].nodesResults[weightNum]; // adds for each linear combination (weighted sum)
-                            printf("\t\tNoderes value: %f\n", nn->layers[layerNum].nodesResults[nodeNum]);
+                            // printf("\t\tNoderes value: %f\n", nn->layers[layerNum].nodesResults[nodeNum]);
                         }
                     }
                     // printf("\t\tBiasder: %f ", nn->layers[0].nodes[nodeNum].biasDerivative);
                     // if (layerNum == nn->nLayers - 1) {
-                        setColor(FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-                        printf("\t\tBias: %f\n", nn->layers[layerNum].nodes[nodeNum].bias);
-                        setColor(saved_attributes);
+                        // setColor(FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+                        // printf("\t\tBias: %f\n", nn->layers[layerNum].nodes[nodeNum].bias);
+                        // setColor(saved_attributes);
                     // }
 
                     nn->layers[layerNum].nodesResults[nodeNum] += nn->layers[layerNum].nodes[nodeNum].bias;
@@ -283,16 +283,35 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
 
             // printf("Before %f\n", nn->loss);
             // printf("loss fn ret: %f\n", CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf));
-            int labelTempArr[] = {0, 2, 1};
+            // int labelTempArr[] = {0, 2, 1};
+            int labelTemp;
+            if (label < 50) {             // Iris-setosa
+                labelTemp = 0;
+            } else if (label < 100) {     // Iris-versicolor
+                labelTemp = 1;
+            } else {                  // Iris-virginica
+                labelTemp = 2;
+            }
             if (strcmp(nn->lf, "categorical_cross_entropy") == 0) {
-                nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf, labelTempArr[label]);
+                nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf, labelTemp);
             } else {
                 nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf, (int) labelVal(labels[label], nn->outShape));
             }
             // nn->loss += CNeural_loss(nn->layers[nn->nLayers - 1].nodesResults, labels[label], nn->outShape, nn->lf, (int) labelVal(labels[label], nn->outShape));
             // printf("After %f\n", nn->loss);
             // TODO implement optimizer flexibility (currently only gradient des.)
-            CNeural_derivatives(nn, inputs[label], labels[label], nn->lf, (int) labelTempArr[label]);
+
+            // probably incorrect
+            // if (strcmp(nn->lf, "categorical_cross_entropy") != 0) {
+            //     CNeural_derivatives(nn, inputs[label], labels[label], nn->lf, (int) labelTemp);
+            //     // printf("\n");
+            //
+            //     for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) { // clear after each label
+            //         CNeural_clear_nodeResults(nn, layerNum);
+            //     }
+            // }
+
+            CNeural_derivatives(nn, inputs[label], labels[label], nn->lf, (int) labelTemp);
             // printf("\n");
 
             for (int layerNum = 0; layerNum < nn->nLayers; layerNum++) { // clear after each label
@@ -311,10 +330,10 @@ void CNeural_train(NeuralNetwork *nn, int numLabels, float inputs[numLabels][nn-
         }
         printf("Loss: %f\n", nn->loss);
         printf("\n");
-
         if (nn->loss < earlyStopLoss) { // early stopping
             return;
         }
+        nn->loss = 0;
         CNeural_update_weights(nn);
 
     }

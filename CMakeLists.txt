@@ -10,7 +10,8 @@ add_executable(CNeural
 #        CNeural_draw.c
         src/CNeural_backpropagation.c
 #        src/examples/mnist/main.c
-        src/examples/hardcode/main.c
+#        src/examples/hardcode/main.c
+        src/examples/iris/main.c
         #        src/examples/test/main.c
 )
 
