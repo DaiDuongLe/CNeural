@@ -41,7 +41,7 @@ $ ./main
 ## PVA Requirements
 Name: Dai Duong Le  
 Class: C1  
-Grading Period: 4rd quarter  
+Grading Period: 4th quarter  
 Requirements: Implement a neural network in C  
 
 ### Steps:
